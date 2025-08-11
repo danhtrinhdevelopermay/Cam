@@ -1,0 +1,3 @@
+- Mỗi lần có thay đổi code thì gửi kèm theo lệnh push code lên github thủ công
+- Mỗi lần push nhớ kiểm tra lỗi xảy ra và sửa
+- Hạn chế gây ra lỗi khi build APK trên action github 
