@@ -329,39 +329,18 @@ class _CameraScreenState extends State<CameraScreen>
         children: [
           // Camera Preview - Full Screen with Proper Scaling
           if (_isCameraInitialized)
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final cameraAspectRatio = _cameraController!.value.aspectRatio;
-                final screenWidth = constraints.maxWidth;
-                final screenHeight = constraints.maxHeight;
-                final screenAspectRatio = screenWidth / screenHeight;
-                
-                print('Camera aspect ratio: $cameraAspectRatio');
-                print('Screen aspect ratio: $screenAspectRatio');
-                
-                // Try to fix stretching by using proper Transform.scale
-                double scale = 1.0;
-                if (cameraAspectRatio < screenAspectRatio) {
-                  // Camera is taller, fit width and scale height
-                  scale = screenHeight / (screenWidth / cameraAspectRatio);
-                } else {
-                  // Camera is wider, fit height and scale width  
-                  scale = screenWidth / (screenHeight * cameraAspectRatio);
-                }
-                
-                print('Calculated scale: $scale');
-                
-                return Center(
-                  child: Transform.scale(
-                    scale: scale,
-                    child: SizedBox(
-                      width: screenWidth,
-                      height: screenWidth / cameraAspectRatio,
-                      child: CameraPreview(_cameraController!),
-                    ),
+            Positioned.fill(
+              child: OverflowBox(
+                alignment: Alignment.center,
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width * _cameraController!.value.aspectRatio,
+                    child: CameraPreview(_cameraController!),
                   ),
-                );
-              },
+                ),
+              ),
             )
           else
             Container(
