@@ -371,11 +371,30 @@ class _CameraScreenState extends State<CameraScreen>
             ),
           ),
 
-          // Aspect Ratio Selector
+          // Bottom Controls Panel - Reorganized for better UX
           Positioned(
-            bottom: 180,
+            bottom: 0,
             left: 0,
             right: 0,
+            child: SafeArea(
+              child: _buildBottomControlsPanel(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Build organized bottom controls panel with scientific hierarchy
+  Widget _buildBottomControlsPanel() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Row 1: Aspect Ratio Selector (top level)
+          Container(
+            margin: const EdgeInsets.only(bottom: 12),
             child: AspectRatioSelector(
               selectedRatio: _selectedAspectRatio,
               onRatioChanged: (ratio) {
@@ -385,12 +404,10 @@ class _CameraScreenState extends State<CameraScreen>
               },
             ),
           ),
-
-          // Mode Selector
-          Positioned(
-            bottom: 140,
-            left: 0,
-            right: 0,
+          
+          // Row 2: Mode Selector (middle level)
+          Container(
+            margin: const EdgeInsets.only(bottom: 16),
             child: ModeSelector(
               currentMode: _currentMode,
               onModeChanged: (mode) {
@@ -400,20 +417,13 @@ class _CameraScreenState extends State<CameraScreen>
               },
             ),
           ),
-
-          // Advanced Zoom Controls with 10x zoom capabilities
+          
+          // Row 3: Advanced Zoom Controls (bottom level - main interaction)
           if (_isCameraInitialized)
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: SafeArea(
-                child: AdvancedZoomControls(
-                  zoomController: _advancedZoomController,
-                  onZoomChanged: _onZoomChanged,
-                  onCapturePressed: _captureEnhancedPhoto,
-                ),
-              ),
+            AdvancedZoomControls(
+              zoomController: _advancedZoomController,
+              onZoomChanged: _onZoomChanged,
+              onCapturePressed: _captureEnhancedPhoto,
             ),
         ],
       ),

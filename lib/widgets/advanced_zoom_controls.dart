@@ -56,22 +56,25 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Enhancement Settings Panel (expandable)
           if (_showEnhancementSettings) _buildEnhancementSettings(),
           
-          // Zoom Method Status
-          _buildZoomMethodStatus(),
-          
-          const SizedBox(height: 12),
-          
-          // Main Zoom Controls
-          _buildMainZoomControls(),
-          
-          const SizedBox(height: 12),
+          // Compact Main Controls Row
+          Row(
+            children: [
+              // Zoom Method Status (left side)
+              Expanded(child: _buildCompactZoomStatus()),
+              
+              const SizedBox(width: 12),
+              
+              // Main Camera Controls (right side)
+              _buildCompactMainControls(),
+            ],
+          ),
           
           // Zoom Slider (expandable)
           if (_showZoomSlider) _buildZoomSlider(),
@@ -551,6 +554,122 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
           ),
         );
       },
+    );
+  }
+
+  /// Build compact zoom status for reorganized layout
+  Widget _buildCompactZoomStatus() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.4),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.2),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            _getZoomMethodIcon(),
+            size: 14,
+            color: Colors.white,
+          ),
+          const SizedBox(width: 6),
+          Flexible(
+            child: Text(
+              widget.zoomController.getCurrentZoomMethodDescription(),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w500,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(width: 6),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _showEnhancementSettings = !_showEnhancementSettings;
+              });
+            },
+            child: Icon(
+              Icons.settings,
+              size: 14,
+              color: Colors.white.withOpacity(0.7),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Build compact main controls for reorganized layout
+  Widget _buildCompactMainControls() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Quick zoom buttons (horizontal row)
+        ...quickZoomLevels.map((zoomLevel) {
+          final isSelected = (widget.zoomController.currentZoomLevel - zoomLevel).abs() < 0.1;
+          return GestureDetector(
+            onTap: () {
+              widget.onZoomChanged(zoomLevel);
+              setState(() {});
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: isSelected ? Colors.yellow : Colors.black.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: isSelected ? Colors.yellow.withOpacity(0.5) : Colors.white.withOpacity(0.2),
+                  width: 1,
+                ),
+              ),
+              child: Text(
+                '${zoomLevel.toInt()}x',
+                style: TextStyle(
+                  color: isSelected ? Colors.black : Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+        
+        const SizedBox(width: 8),
+        
+        // Zoom slider toggle
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _showZoomSlider = !_showZoomSlider;
+            });
+          },
+          child: Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: _showZoomSlider ? Colors.yellow.withOpacity(0.2) : Colors.black.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: _showZoomSlider ? Colors.yellow.withOpacity(0.5) : Colors.white.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+            child: Icon(
+              Icons.tune,
+              size: 16,
+              color: _showZoomSlider ? Colors.yellow : Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

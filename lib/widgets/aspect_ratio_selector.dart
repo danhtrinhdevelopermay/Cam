@@ -25,7 +25,7 @@ class AspectRatioSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: BackdropFilter(
@@ -50,8 +50,8 @@ class AspectRatioSelector extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
+                      horizontal: 12,
+                      vertical: 6,
                     ),
                     decoration: BoxDecoration(
                       color: isSelected 
@@ -63,7 +63,7 @@ class AspectRatioSelector extends StatelessWidget {
                       ratio.label,
                       style: TextStyle(
                         color: isSelected ? Colors.black : Colors.white,
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                       ),
                     ),

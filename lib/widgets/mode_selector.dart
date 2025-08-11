@@ -22,7 +22,7 @@ class ModeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 32,
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
@@ -48,8 +48,8 @@ class ModeSelector extends StatelessWidget {
                   onTap: () => onModeChanged(mode.toLowerCase()),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 8,
+                      horizontal: 16,
+                      vertical: 6,
                     ),
                     child: Center(
                       child: Text(
@@ -58,7 +58,7 @@ class ModeSelector extends StatelessWidget {
                           color: isSelected 
                               ? Colors.yellow 
                               : Colors.white.withOpacity(0.8),
-                          fontSize: 14,
+                          fontSize: 12,
                           fontWeight: isSelected 
                               ? FontWeight.w600 
                               : FontWeight.w400,
