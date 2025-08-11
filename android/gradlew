@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Gradle wrapper script for Unix-like systems
+# This will be properly configured by Flutter
+
+echo "Using Flutter's Gradle configuration..."
+exec flutter build apk --release

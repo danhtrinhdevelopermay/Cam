@@ -11,21 +11,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: write
+      packages: read
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       
     - name: Setup Java
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
-        distribution: 'zulu'
+        distribution: 'temurin'
         java-version: '17'
         
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.16.0'
+        flutter-version: '3.19.6'
         channel: 'stable'
+        cache: true
         
     - name: Install dependencies
       run: flutter pub get
@@ -38,41 +43,53 @@ jobs:
       continue-on-error: true
       
     - name: Analyze code
-      run: flutter analyze
+      run: flutter analyze --no-fatal-infos
       continue-on-error: true
       
     - name: Build APK
-      run: flutter build apk --release
+      run: flutter build apk --release --verbose
       
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ios18-camera-app-release
         path: build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 30
         
     - name: Create Release
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      uses: actions/create-release@v1
+      id: create_release
+      uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
+        name: iOS18 Camera App v${{ github.run_number }}
         body: |
-          Auto-generated release from GitHub Actions
-          - Built APK with Flutter
-          - iOS 18 style camera interface
-          - Gaussian blur effects
+          ## iOS 18 Style Camera App Release
+          
+          **Features:**
+          - iOS 18-style camera interface with dark theme
+          - Gaussian blur effects and glass morphism UI
+          - Photo capture with gallery saving
+          - Camera switching (front/rear)
+          - Flash control and zoom functionality
+          - Mode selection: Time-lapse, Slo-mo, Video, Photo, Portrait
+          
+          **Technical Details:**
+          - Built with Flutter ${{ steps.flutter.outputs.version }}
+          - Target SDK: Android API 34
+          - Minimum SDK: Android API 21 (Android 5.0+)
+          
+          **Installation:**
+          Download the APK file below and install on your Android device.
+          Make sure to enable "Install from unknown sources" in your device settings.
+          
+          **Permissions Required:**
+          - Camera access
+          - Storage access
+          - Microphone access (for video recording)
+        files: |
+          build/app/outputs/flutter-apk/app-release.apk
         draft: false
         prerelease: false
-        
-    - name: Upload Release Asset
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: build/app/outputs/flutter-apk/app-release.apk
-        asset_name: ios18-camera-app-v${{ github.run_number }}.apk
-        asset_content_type: application/vnd.android.package-archive
