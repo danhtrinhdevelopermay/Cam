@@ -5,12 +5,16 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'dart:typed_data';
 
 import '../widgets/blur_overlay.dart';
 import '../widgets/mode_selector.dart';
 import '../widgets/aspect_ratio_selector.dart';
 import '../widgets/advanced_zoom_controls.dart';
+import '../widgets/color_settings_panel.dart';
 import '../camera/advanced_zoom_controller.dart';
+import '../camera/color_processing_controller.dart';
+import '../camera/hdr_capture_controller.dart';
 import 'dart:ui';
 
 class CameraScreen extends StatefulWidget {
@@ -37,6 +41,13 @@ class _CameraScreenState extends State<CameraScreen>
   // Advanced zoom controller for 10x zoom capabilities
   late AdvancedZoomController _advancedZoomController;
   
+  // iOS 18-style color processing controllers
+  late ColorProcessingController _colorProcessingController;
+  late HdrCaptureController _hdrCaptureController;
+  
+  // UI state
+  bool _showColorSettings = false;
+  
   late AnimationController _animationController;
   late AnimationController _blurController;
   late Animation<double> _blurAnimation;
@@ -46,6 +57,8 @@ class _CameraScreenState extends State<CameraScreen>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _advancedZoomController = AdvancedZoomController();
+    _colorProcessingController = ColorProcessingController();
+    _hdrCaptureController = HdrCaptureController();
     _initializeCamera();
     _setupAnimations();
     _requestPermissions();
@@ -97,6 +110,9 @@ class _CameraScreenState extends State<CameraScreen>
       _advancedZoomController.setCameraController(_cameraController!);
       _advancedZoomController.currentCamera = widget.cameras[_selectedCameraIndex];
       
+      // Configure advanced color processing
+      await _colorProcessingController.configureCameraForAdvancedColor(_cameraController!);
+      
       setState(() {
         _isCameraInitialized = true;
       });
@@ -137,16 +153,30 @@ class _CameraScreenState extends State<CameraScreen>
         _blurController.reverse();
       });
 
-      final XFile image = await _cameraController!.takePicture();
+      // Capture HDR image with advanced color processing
+      final hdrResult = await _hdrCaptureController.captureHdrImage(_cameraController!);
+      final imageData = hdrResult['image'] as Uint8List;
+      final isHdr = hdrResult['isHdr'] as bool;
       
-      // Save to gallery
-      await ImageGallerySaver.saveFile(image.path);
+      // Apply iOS 18-style color processing
+      final processedImageData = await _colorProcessingController.processImageWithAdvancedColor(imageData);
       
-      // Show success feedback with aspect ratio info
+      // Save processed image to gallery
+      final tempDir = await getTemporaryDirectory();
+      final tempFile = File('${tempDir.path}/ios18_photo_${DateTime.now().millisecondsSinceEpoch}.jpg');
+      await tempFile.writeAsBytes(processedImageData);
+      
+      await ImageGallerySaver.saveFile(tempFile.path);
+      
+      // Clean up temp file
+      await tempFile.delete();
+      
+      // Show success feedback with processing info
       if (mounted) {
+        final processingInfo = isHdr ? 'HDR + P3' : 'P3 Enhanced';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Photo saved to gallery (${_selectedAspectRatio.label})'),
+            content: Text('Photo saved (${_selectedAspectRatio.label}, $processingInfo)'),
             backgroundColor: Colors.green.withOpacity(0.8),
             duration: const Duration(seconds: 2),
           ),
@@ -154,6 +184,23 @@ class _CameraScreenState extends State<CameraScreen>
       }
     } catch (e) {
       print('Error taking picture: $e');
+      // Fallback to standard capture
+      try {
+        final XFile image = await _cameraController!.takePicture();
+        await ImageGallerySaver.saveFile(image.path);
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Photo saved (Standard mode) - ${_selectedAspectRatio.label}'),
+              backgroundColor: Colors.orange.withOpacity(0.8),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      } catch (fallbackError) {
+        print('Fallback capture also failed: $fallbackError');
+      }
     }
   }
 
@@ -215,10 +262,13 @@ class _CameraScreenState extends State<CameraScreen>
       final imageData = await _advancedZoomController.captureEnhancedZoomedImage();
       
       if (imageData != null) {
+        // Apply iOS 18-style color processing to enhanced image
+        final processedImageData = await _colorProcessingController.processImageWithAdvancedColor(imageData);
+        
         // Save to gallery using temporary file
         final tempDir = await getTemporaryDirectory();
-        final tempFile = File('${tempDir.path}/enhanced_photo_${DateTime.now().millisecondsSinceEpoch}.jpg');
-        await tempFile.writeAsBytes(imageData);
+        final tempFile = File('${tempDir.path}/enhanced_ios18_photo_${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await tempFile.writeAsBytes(processedImageData);
         
         await ImageGallerySaver.saveFile(tempFile.path);
         
@@ -228,7 +278,7 @@ class _CameraScreenState extends State<CameraScreen>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Enhanced photo saved (${_selectedAspectRatio.label}, ${_advancedZoomController.getCurrentZoomMethodDescription()})'),
+              content: Text('Enhanced photo saved (${_selectedAspectRatio.label}, ${_advancedZoomController.getCurrentZoomMethodDescription()}, iOS 18 Colors)'),
               backgroundColor: Colors.green.withOpacity(0.8),
               duration: const Duration(seconds: 3),
             ),
@@ -238,12 +288,12 @@ class _CameraScreenState extends State<CameraScreen>
         throw Exception('Enhanced capture failed');
       }
     } catch (e) {
-      // Fallback to regular capture
+      // Fallback to regular capture with color processing
       await _takePicture();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Fallback to regular capture: $e'),
+            content: Text('Enhanced zoom failed, used standard capture with iOS 18 colors'),
             backgroundColor: Colors.orange.withOpacity(0.8),
           ),
         );
@@ -323,12 +373,15 @@ class _CameraScreenState extends State<CameraScreen>
                       ),
                     ),
 
-                  // Settings Button - iOS 18 Style
+                  // Color Settings Button - iOS 18 Style
                   iOS18CircularButton(
-                    icon: Icons.settings,
+                    icon: Icons.palette,
                     onTap: () {
-                      // TODO: Open settings
+                      setState(() {
+                        _showColorSettings = !_showColorSettings;
+                      });
                     },
+                    isActive: _showColorSettings,
                     size: 44,
                   ),
                 ],
@@ -345,6 +398,18 @@ class _CameraScreenState extends State<CameraScreen>
               child: _buildBottomControlsPanel(),
             ),
           ),
+          
+          // Color Settings Panel
+          if (_showColorSettings)
+            ColorSettingsPanel(
+              colorController: _colorProcessingController,
+              hdrController: _hdrCaptureController,
+              onClose: () {
+                setState(() {
+                  _showColorSettings = false;
+                });
+              },
+            ),
         ],
       ),
     );

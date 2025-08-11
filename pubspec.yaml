@@ -23,6 +23,10 @@ dependencies:
   http: ^0.13.5
   dio: ^5.3.2
   flutter_image_compress: ^2.0.4
+  
+  # iOS 18-style color processing and HDR
+  vector_math: ^2.1.4
+  meta: ^1.9.1
 
 dev_dependencies:
   flutter_test:

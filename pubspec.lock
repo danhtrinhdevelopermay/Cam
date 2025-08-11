@@ -329,7 +329,7 @@ packages:
     source: hosted
     version: "0.11.1"
   meta:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: meta
       sha256: e3641ec5d63ebf0d9b41bd43201a66e3fc79a65db5f61fc181f04cd27aab950c
@@ -566,7 +566,7 @@ packages:
     source: hosted
     version: "1.4.0"
   vector_math:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: vector_math
       sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
