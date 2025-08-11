@@ -2,7 +2,7 @@
 
 ## Overview
 
-iOS 18-style camera application built with Flutter for Android. Features include Gaussian blur effects, modern glass morphism UI, camera controls (photo/video capture, zoom, flash, camera switching), mode selection, and automated APK building via GitHub Actions. The project emphasizes preventing build failures and maintaining code quality through manual testing before deployment.
+iOS 18-style camera application built with Flutter for Android. Features include Gaussian blur effects, modern glass morphism UI, camera controls (photo/video capture, zoom, flash, camera switching), mode selection, aspect ratio adjustment (Full, 16:9, 4:3, 1:1), and automated APK building via GitHub Actions. The project emphasizes preventing build failures and maintaining code quality through manual testing before deployment.
 
 ## User Preferences
 
@@ -28,6 +28,7 @@ Preferred communication style: Simple, everyday language.
   - `lib/widgets/blur_overlay.dart` - Gaussian blur effects and glass morphism
   - `lib/widgets/camera_controls.dart` - Photo capture, gallery, camera switch controls
   - `lib/widgets/mode_selector.dart` - Time-lapse, Video, Photo, Portrait mode selection
+  - `lib/widgets/aspect_ratio_selector.dart` - Aspect ratio adjustment (Full, 16:9, 4:3, 1:1)
 
 ### Android Configuration
 - **Build**: `android/app/build.gradle` - Android build configuration with camera permissions

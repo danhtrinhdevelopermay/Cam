@@ -6,6 +6,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import '../widgets/camera_controls.dart';
 import '../widgets/blur_overlay.dart';
 import '../widgets/mode_selector.dart';
+import '../widgets/aspect_ratio_selector.dart';
 
 class CameraScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -27,6 +28,7 @@ class _CameraScreenState extends State<CameraScreen>
   double _zoomLevel = 1.0;
   double _minZoom = 1.0;
   double _maxZoom = 1.0;
+  CameraAspectRatio _selectedAspectRatio = CameraAspectRatio.full;
   
   late AnimationController _animationController;
   late AnimationController _blurController;
@@ -127,11 +129,11 @@ class _CameraScreenState extends State<CameraScreen>
       // Save to gallery
       await ImageGallerySaver.saveFile(image.path);
       
-      // Show success feedback
+      // Show success feedback with aspect ratio info
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Photo saved to gallery'),
+            content: Text('Photo saved to gallery (${_selectedAspectRatio.label})'),
             backgroundColor: Colors.green.withOpacity(0.8),
             duration: const Duration(seconds: 2),
           ),
@@ -185,12 +187,16 @@ class _CameraScreenState extends State<CameraScreen>
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // Camera Preview
+          // Camera Preview with Aspect Ratio Overlay
           if (_isCameraInitialized)
-            SizedBox.expand(
-              child: AspectRatio(
-                aspectRatio: _cameraController!.value.aspectRatio,
-                child: CameraPreview(_cameraController!),
+            AspectRatioOverlay(
+              aspectRatio: _selectedAspectRatio,
+              screenSize: MediaQuery.of(context).size,
+              child: SizedBox.expand(
+                child: AspectRatio(
+                  aspectRatio: _cameraController!.value.aspectRatio,
+                  child: CameraPreview(_cameraController!),
+                ),
               ),
             )
           else
@@ -293,6 +299,21 @@ class _CameraScreenState extends State<CameraScreen>
                   ),
                 ],
               ),
+            ),
+          ),
+
+          // Aspect Ratio Selector
+          Positioned(
+            bottom: 180,
+            left: 0,
+            right: 0,
+            child: AspectRatioSelector(
+              selectedRatio: _selectedAspectRatio,
+              onRatioChanged: (ratio) {
+                setState(() {
+                  _selectedAspectRatio = ratio;
+                });
+              },
             ),
           ),
 
