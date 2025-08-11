@@ -1,37 +1,27 @@
 name: ios18_camera_app
 description: A camera application with iOS 18-style interface and Gaussian blur effects
-publish_to: 'none'
-version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: ">=3.10.0"
+  sdk: '^3.0.0'
+  flutter: ">=3.16.0"
 
 dependencies:
+  camera: ^0.10.5+5
+  cupertino_icons: ^1.0.6
+  dio: ^5.3.2
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
-  camera: ^0.10.5+9
-  image: ^4.1.7
+  flutter_bloc: ^8.1.3
+  flutter_image_compress: ^2.0.4
+  http: ^0.13.5
+  image: ^4.1.3
+  image_gallery_saver: ^2.0.3
+  meta: ^1.9.1
   path_provider: ^2.1.1
   permission_handler: ^11.0.1
-  cupertino_icons: ^1.0.6
-  flutter_bloc: ^8.1.3
-  equatable: ^2.0.5
-  image_gallery_saver: ^2.0.3
-  
-  # Advanced image processing for 10x zoom
-  http: ^0.13.5
-  dio: ^5.3.2
-  flutter_image_compress: ^2.0.4
-  
-  # iOS 18-style color processing and HDR
   vector_math: ^2.1.4
-  meta: ^1.9.1
-
 dev_dependencies:
+  flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
-
-flutter:
-  uses-material-design: true

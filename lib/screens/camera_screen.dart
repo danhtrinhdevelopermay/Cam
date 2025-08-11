@@ -327,15 +327,20 @@ class _CameraScreenState extends State<CameraScreen>
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // Camera Preview with Aspect Ratio Overlay
+          // Camera Preview - NO BLUR EFFECTS
           if (_isCameraInitialized)
-            AspectRatioOverlay(
-              aspectRatio: _selectedAspectRatio,
-              screenSize: MediaQuery.of(context).size,
-              child: SizedBox.expand(
-                child: AspectRatio(
-                  aspectRatio: _cameraController!.value.aspectRatio,
-                  child: CameraPreview(_cameraController!),
+            SizedBox.expand(
+              child: ClipRect(
+                child: OverflowBox(
+                  alignment: Alignment.center,
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.width / _cameraController!.value.aspectRatio,
+                      child: CameraPreview(_cameraController!),
+                    ),
+                  ),
                 ),
               ),
             )
@@ -348,6 +353,10 @@ class _CameraScreenState extends State<CameraScreen>
                 ),
               ),
             ),
+
+          // Aspect Ratio Overlay (separate from camera preview)
+          if (_isCameraInitialized && _selectedAspectRatio != CameraAspectRatio.full)
+            _buildAspectRatioOverlay(),
 
 
 
@@ -423,6 +432,89 @@ class _CameraScreenState extends State<CameraScreen>
             ),
         ],
       ),
+    );
+  }
+
+  /// Build aspect ratio overlay without affecting camera preview
+  Widget _buildAspectRatioOverlay() {
+    final screenSize = MediaQuery.of(context).size;
+    final targetAspectRatio = _selectedAspectRatio.value;
+    final screenAspectRatio = screenSize.width / screenSize.height;
+    
+    double overlayWidth = screenSize.width;
+    double overlayHeight = screenSize.height;
+    
+    if (targetAspectRatio > screenAspectRatio) {
+      overlayHeight = overlayWidth / targetAspectRatio;
+    } else {
+      overlayWidth = overlayHeight * targetAspectRatio;
+    }
+
+    final topBottomOverlay = (screenSize.height - overlayHeight) / 2;
+    final leftRightOverlay = (screenSize.width - overlayWidth) / 2;
+
+    return Stack(
+      children: [
+        // Top overlay
+        if (topBottomOverlay > 0)
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: topBottomOverlay,
+            child: Container(
+              color: Colors.black.withOpacity(0.7),
+            ),
+          ),
+        // Bottom overlay
+        if (topBottomOverlay > 0)
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: topBottomOverlay,
+            child: Container(
+              color: Colors.black.withOpacity(0.7),
+            ),
+          ),
+        // Left overlay
+        if (leftRightOverlay > 0)
+          Positioned(
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: leftRightOverlay,
+            child: Container(
+              color: Colors.black.withOpacity(0.7),
+            ),
+          ),
+        // Right overlay
+        if (leftRightOverlay > 0)
+          Positioned(
+            top: 0,
+            bottom: 0,
+            right: 0,
+            width: leftRightOverlay,
+            child: Container(
+              color: Colors.black.withOpacity(0.7),
+            ),
+          ),
+        // Aspect ratio indicator lines
+        Positioned(
+          top: topBottomOverlay > 0 ? topBottomOverlay : leftRightOverlay,
+          left: leftRightOverlay > 0 ? leftRightOverlay : topBottomOverlay,
+          child: Container(
+            width: overlayWidth,
+            height: overlayHeight,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.white.withOpacity(0.3),
+                width: 1,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
