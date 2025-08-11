@@ -1,0 +1,87 @@
+﻿2025-08-11T04:04:47.8368865Z ##[group]Run flutter build apk --release
+2025-08-11T04:04:47.8369220Z [36;1mflutter build apk --release[0m
+2025-08-11T04:04:47.8408823Z shell: /usr/bin/bash -e {0}
+2025-08-11T04:04:47.8409073Z env:
+2025-08-11T04:04:47.8409371Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T04:04:47.8409856Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T04:04:47.8410331Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T04:04:47.8410676Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T04:04:47.8411133Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T04:04:47.8411424Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T04:04:47.8411692Z ##[endgroup]
+2025-08-11T04:04:48.3291838Z 
+2025-08-11T04:06:04.4981500Z Running Gradle task 'assembleRelease'...                        
+2025-08-11T04:06:04.4983036Z Checking the license for package Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/licenses
+2025-08-11T04:06:04.4986173Z License for package Android SDK Build-Tools 30.0.3 accepted.
+2025-08-11T04:06:04.4987059Z Preparing "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)".
+2025-08-11T04:06:05.5904132Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" ready.
+2025-08-11T04:06:05.5905306Z Installing Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/build-tools/30.0.3
+2025-08-11T04:06:05.5906317Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" complete.
+2025-08-11T04:06:05.7841554Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" finished.
+2025-08-11T04:06:05.9838649Z Checking the license for package Android SDK Platform 30 in /usr/local/lib/android/sdk/licenses
+2025-08-11T04:06:05.9841521Z License for package Android SDK Platform 30 accepted.
+2025-08-11T04:06:05.9842673Z Preparing "Install Android SDK Platform 30 (revision: 3)".
+2025-08-11T04:06:08.1835056Z "Install Android SDK Platform 30 (revision: 3)" ready.
+2025-08-11T04:06:08.2838213Z Installing Android SDK Platform 30 in /usr/local/lib/android/sdk/platforms/android-30
+2025-08-11T04:06:08.2842090Z "Install Android SDK Platform 30 (revision: 3)" complete.
+2025-08-11T04:06:08.2853103Z "Install Android SDK Platform 30 (revision: 3)" finished.
+2025-08-11T04:06:32.4944231Z lib/widgets/advanced_zoom_controls.dart:171:7: Error: Expected ';' after this.
+2025-08-11T04:06:32.4945064Z       ),
+2025-08-11T04:06:32.4945394Z       ^
+2025-08-11T04:06:32.4946362Z lib/widgets/advanced_zoom_controls.dart:171:8: Error: Expected an identifier, but got ','.
+2025-08-11T04:06:32.4947320Z Try inserting an identifier before ','.
+2025-08-11T04:06:32.4947798Z       ),
+2025-08-11T04:06:32.4948103Z        ^
+2025-08-11T04:06:32.4948872Z lib/widgets/advanced_zoom_controls.dart:171:8: Error: Unexpected token ';'.
+2025-08-11T04:06:32.4949548Z       ),
+2025-08-11T04:06:32.4949853Z        ^
+2025-08-11T04:06:32.4950747Z lib/widgets/advanced_zoom_controls.dart:172:5: Error: Expected an identifier, but got ')'.
+2025-08-11T04:06:32.4951634Z Try inserting an identifier before ')'.
+2025-08-11T04:06:32.4952111Z     );
+2025-08-11T04:06:32.4953008Z     ^
+2025-08-11T04:06:32.4953827Z lib/widgets/advanced_zoom_controls.dart:171:8: Error: Expected ';' after this.
+2025-08-11T04:06:32.4954516Z       ),
+2025-08-11T04:06:32.4954821Z        ^
+2025-08-11T04:06:32.4955578Z lib/widgets/advanced_zoom_controls.dart:172:5: Error: Unexpected token ';'.
+2025-08-11T04:06:32.4956239Z     );
+2025-08-11T04:06:32.4956532Z     ^
+2025-08-11T04:06:32.5003390Z lib/widgets/advanced_zoom_controls.dart:233:7: Error: Expected ';' after this.
+2025-08-11T04:06:32.5004148Z       ),
+2025-08-11T04:06:32.5004457Z       ^
+2025-08-11T04:06:32.5005354Z lib/widgets/advanced_zoom_controls.dart:233:8: Error: Expected an identifier, but got ','.
+2025-08-11T04:06:32.5006246Z Try inserting an identifier before ','.
+2025-08-11T04:06:32.5006719Z       ),
+2025-08-11T04:06:32.5007023Z        ^
+2025-08-11T04:06:32.5007788Z lib/widgets/advanced_zoom_controls.dart:233:8: Error: Unexpected token ';'.
+2025-08-11T04:06:32.5009011Z       ),
+2025-08-11T04:06:32.5009322Z        ^
+2025-08-11T04:06:32.5010238Z lib/widgets/advanced_zoom_controls.dart:234:5: Error: Expected an identifier, but got ')'.
+2025-08-11T04:06:32.5011127Z Try inserting an identifier before ')'.
+2025-08-11T04:06:32.5011574Z     );
+2025-08-11T04:06:32.5011862Z     ^
+2025-08-11T04:06:32.5012798Z lib/widgets/advanced_zoom_controls.dart:233:8: Error: Expected ';' after this.
+2025-08-11T04:06:32.5013488Z       ),
+2025-08-11T04:06:32.5013794Z        ^
+2025-08-11T04:06:32.5014936Z lib/widgets/advanced_zoom_controls.dart:234:5: Error: Unexpected token ';'.
+2025-08-11T04:06:32.5015600Z     );
+2025-08-11T04:06:32.5015895Z     ^
+2025-08-11T04:06:37.7838078Z Target kernel_snapshot failed: Exception
+2025-08-11T04:06:37.7838545Z 
+2025-08-11T04:06:37.8834024Z 
+2025-08-11T04:06:37.8835916Z FAILURE: Build failed with an exception.
+2025-08-11T04:06:37.8836864Z 
+2025-08-11T04:06:37.8837208Z * What went wrong:
+2025-08-11T04:06:37.8837679Z Execution failed for task ':app:compileFlutterBuildRelease'.
+2025-08-11T04:06:37.8839192Z > Process 'command '/opt/hostedtoolcache/flutter/stable-3.19.6-x64/bin/flutter'' finished with non-zero exit value 1
+2025-08-11T04:06:37.8839781Z 
+2025-08-11T04:06:37.8840223Z * Try:
+2025-08-11T04:06:37.8841111Z > Run with --stacktrace option to get the stack trace.
+2025-08-11T04:06:37.8841858Z > Run with --info or --debug option to get more log output.
+2025-08-11T04:06:37.8842789Z > Run with --scan to get full insights.
+2025-08-11T04:06:37.8843316Z 
+2025-08-11T04:06:37.8844460Z * Get more help at https://help.gradle.org
+2025-08-11T04:06:37.8845003Z 
+2025-08-11T04:06:37.8845766Z BUILD FAILED in 1m 49s
+2025-08-11T04:06:38.2598541Z Running Gradle task 'assembleRelease'...                          109.9s
+2025-08-11T04:06:38.2641101Z Gradle task assembleRelease failed with exit code 1
+2025-08-11T04:06:38.2702559Z ##[error]Process completed with exit code 1.

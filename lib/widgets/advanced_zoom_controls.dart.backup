@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import '../camera/advanced_zoom_controller.dart';
 import 'blur_overlay.dart';
 
+/// Advanced zoom controls widget with 10x zoom capabilities
+/// Provides UI for optical zoom, digital zoom, and enhancement method selection
 class AdvancedZoomControls extends StatefulWidget {
   final AdvancedZoomController zoomController;
   final Function(double) onZoomChanged;
@@ -19,12 +22,12 @@ class AdvancedZoomControls extends StatefulWidget {
 }
 
 class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
-
-  // UI State
+  
+  // Zoom levels for quick selection (iOS 18 style)
   final List<double> quickZoomLevels = [1.0, 2.0, 5.0, 10.0];
   bool _showZoomSlider = false;
   bool _showEnhancementSettings = false;
@@ -86,6 +89,24 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
     );
   }
 
+  /// Get appropriate icon for current zoom method
+  IconData _getZoomMethodIcon() {
+    final controller = widget.zoomController;
+    
+    if (controller.currentZoomLevel <= controller.maxOpticalZoom && 
+        controller.opticalZoomEnabled) {
+      return Icons.camera_alt; // Optical zoom
+    } else if (controller.highResolutionCropEnabled) {
+      return Icons.crop; // High-res crop
+    } else if (controller.aiSuperResolutionEnabled) {
+      return Icons.auto_awesome; // AI enhancement
+    } else {
+      return Icons.zoom_in; // Digital zoom
+    }
+  }
+
+
+
   /// Build expandable zoom slider for precise control
   Widget _buildZoomSlider() {
     return AnimatedContainer(
@@ -143,7 +164,8 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                   fontWeight: FontWeight.w600,
                 ),
               ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -203,7 +225,8 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                 (value) => setState(() => controller.aiSuperResolutionEnabled = value),
                 false, // Disabled by default due to performance
               ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -242,16 +265,12 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
                           color: Colors.green.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: Colors.green.withOpacity(0.3),
-                            width: 1,
-                          ),
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Text(
-                          'RECOMMENDED',
+                        child: const Text(
+                          'REC',
                           style: TextStyle(
-                            color: Colors.green.withOpacity(0.9),
+                            color: Colors.green,
                             fontSize: 8,
                             fontWeight: FontWeight.w600,
                           ),
@@ -269,11 +288,12 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
               ],
             ),
           ),
-          Switch.adaptive(
+          Switch(
             value: value,
             onChanged: onChanged,
             activeColor: Colors.yellow,
-            activeTrackColor: Colors.yellow.withOpacity(0.3),
+            inactiveThumbColor: Colors.white.withOpacity(0.7),
+            inactiveTrackColor: Colors.white.withOpacity(0.2),
           ),
         ],
       ),
@@ -286,27 +306,28 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.1),
+        color: Colors.orange.withOpacity(0.2),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Colors.orange.withOpacity(0.3),
+          color: Colors.orange.withOpacity(0.4),
           width: 1,
         ),
       ),
       child: Row(
         children: [
-          const Icon(
-            Icons.warning,
-            color: Colors.orange,
+          Icon(
+            Icons.info_outline,
             size: 16,
+            color: Colors.orange,
           ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.orange,
-                fontSize: 10,
+                fontSize: 11,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
@@ -315,97 +336,145 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
     );
   }
 
-  /// Build compact zoom status indicator (left side)
-  Widget _buildCompactZoomStatus() {
-    final controller = widget.zoomController;
-    final zoomMethod = _getZoomMethodText();
-    final zoomIcon = _getZoomMethodIcon();
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _showEnhancementSettings = !_showEnhancementSettings;
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.6),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2),
-            width: 1,
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              zoomIcon,
-              color: Colors.yellow,
-              size: 16,
-            ),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Text(
-                zoomMethod,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
+  /// Build enhanced capture button with animation
+  Widget _buildEnhancedCaptureButton() {
+    return AnimatedBuilder(
+      animation: _scaleAnimation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _scaleAnimation.value,
+          child: GestureDetector(
+            onTapDown: (_) => _animationController.forward(),
+            onTapUp: (_) => _animationController.reverse(),
+            onTapCancel: () => _animationController.reverse(),
+            onTap: widget.onCapturePressed,
+            child: Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.yellow,
+                  width: 4,
                 ),
-                overflow: TextOverflow.ellipsis,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.yellow.withOpacity(0.3),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // Inner circle with enhanced indicator
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.auto_awesome,
+                      color: Colors.black,
+                      size: 24,
+                    ),
+                  ),
+                  
+                  // Enhanced capture indicator
+                  Positioned(
+                    bottom: 6,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        '${widget.zoomController.currentZoomLevel.toStringAsFixed(1)}x',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 8,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Icon(
-              _showEnhancementSettings ? Icons.expand_less : Icons.expand_more,
-              color: Colors.white.withOpacity(0.7),
-              size: 16,
+          ),
+        );
+      },
+    );
+  }
+
+  /// Build compact zoom status for reorganized layout with iOS 18 styling
+  Widget _buildCompactZoomStatus() {
+    return iOS18GlassEffect(
+      borderRadius: BorderRadius.circular(12),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      blur: 15.0,
+      opacity: 0.3,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            _getZoomMethodIcon(),
+            size: 14,
+            color: Colors.white.withOpacity(0.9),
+          ),
+          const SizedBox(width: 6),
+          Flexible(
+            child: Text(
+              widget.zoomController.getCurrentZoomMethodDescription(),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.2,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
-          ],
-        ),
+          ),
+          const SizedBox(width: 6),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _showEnhancementSettings = !_showEnhancementSettings;
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: _showEnhancementSettings 
+                  ? Colors.yellow.withOpacity(0.2) 
+                  : Colors.transparent,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Icon(
+                Icons.settings,
+                size: 14,
+                color: _showEnhancementSettings 
+                  ? Colors.yellow 
+                  : Colors.white.withOpacity(0.8),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  /// Get appropriate icon for current zoom method
-  IconData _getZoomMethodIcon() {
-    final controller = widget.zoomController;
-    
-    if (controller.currentZoomLevel <= controller.maxOpticalZoom && 
-        controller.opticalZoomEnabled) {
-      return Icons.camera_alt; // Optical zoom
-    } else if (controller.highResolutionCropEnabled) {
-      return Icons.crop; // High-res crop
-    } else if (controller.aiSuperResolutionEnabled) {
-      return Icons.auto_awesome; // AI enhancement
-    } else {
-      return Icons.zoom_in; // Digital zoom
-    }
-  }
-
-  /// Get text description of current zoom method
-  String _getZoomMethodText() {
-    final controller = widget.zoomController;
-    
-    if (controller.currentZoomLevel <= controller.maxOpticalZoom && 
-        controller.opticalZoomEnabled) {
-      return 'Optical ${controller.currentZoomLevel.toStringAsFixed(1)}x';
-    } else if (controller.highResolutionCropEnabled) {
-      return 'Hi-Res ${controller.currentZoomLevel.toStringAsFixed(1)}x';
-    } else if (controller.aiSuperResolutionEnabled) {
-      return 'AI ${controller.currentZoomLevel.toStringAsFixed(1)}x';
-    } else {
-      return 'Digital ${controller.currentZoomLevel.toStringAsFixed(1)}x';
-    }
-  }
-
-  /// Build compact main controls (right side)
+  /// Build compact main controls for reorganized layout
   Widget _buildCompactMainControls() {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Quick zoom level buttons
+        // Quick zoom buttons (horizontal row)
         ...quickZoomLevels.map((zoomLevel) {
           final isSelected = (widget.zoomController.currentZoomLevel - zoomLevel).abs() < 0.1;
           return GestureDetector(
@@ -479,74 +548,6 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
           ),
         ),
       ],
-    );
-  }
-
-  /// Build enhanced capture button with zoom method indicator
-  Widget _buildEnhancedCaptureButton() {
-    final zoomLevel = widget.zoomController.currentZoomLevel;
-    final isOptical = zoomLevel <= widget.zoomController.maxOpticalZoom && 
-                     widget.zoomController.opticalZoomEnabled;
-    
-    return GestureDetector(
-      onTap: widget.onCapturePressed,
-      onTapDown: (_) => _animationController.forward(),
-      onTapUp: (_) => _animationController.reverse(),
-      onTapCancel: () => _animationController.reverse(),
-      child: AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) => Transform.scale(
-          scale: _scaleAnimation.value,
-          child: Container(
-            width: 70,
-            height: 70,
-            decoration: BoxDecoration(
-              color: isOptical ? Colors.green : Colors.red,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white,
-                width: 3,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: (isOptical ? Colors.green : Colors.red).withOpacity(0.4),
-                  blurRadius: 15,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Icon(
-                  Icons.circle,
-                  size: 40,
-                  color: Colors.white.withOpacity(0.9),
-                ),
-                // Zoom level indicator
-                Positioned(
-                  bottom: 8,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      '${zoomLevel.toStringAsFixed(1)}x',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

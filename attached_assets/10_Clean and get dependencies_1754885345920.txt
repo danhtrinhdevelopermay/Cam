@@ -1,0 +1,66 @@
+﻿2025-08-11T04:04:46.5203145Z ##[group]Run flutter clean
+2025-08-11T04:04:46.5203588Z [36;1mflutter clean[0m
+2025-08-11T04:04:46.5203956Z [36;1mflutter pub get[0m
+2025-08-11T04:04:46.5255527Z shell: /usr/bin/bash -e {0}
+2025-08-11T04:04:46.5255925Z env:
+2025-08-11T04:04:46.5256417Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T04:04:46.5257241Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T04:04:46.5258049Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T04:04:46.5258620Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T04:04:46.5259081Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T04:04:46.5259570Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T04:04:46.5260022Z ##[endgroup]
+2025-08-11T04:04:46.7231931Z Deleting build...                                                    1ms
+2025-08-11T04:04:46.7236611Z Deleting .dart_tool...                                               0ms
+2025-08-11T04:04:46.7261301Z Deleting .flutter-plugins-dependencies...                            0ms
+2025-08-11T04:04:46.7264669Z Deleting .flutter-plugins...                                         0ms
+2025-08-11T04:04:47.0452748Z Resolving dependencies...
+2025-08-11T04:04:47.4406164Z   async 2.11.0 (2.13.0 available)
+2025-08-11T04:04:47.4406891Z   bloc 8.1.4 (9.0.0 available)
+2025-08-11T04:04:47.4407489Z   boolean_selector 2.1.1 (2.1.2 available)
+2025-08-11T04:04:47.4408100Z   camera 0.10.6 (0.11.2 available)
+2025-08-11T04:04:47.4408711Z   camera_android 0.10.9+2 (0.10.10+5 available)
+2025-08-11T04:04:47.4409403Z   camera_avfoundation 0.9.17+5 (0.9.21+1 available)
+2025-08-11T04:04:47.4410125Z   camera_platform_interface 2.8.0 (2.10.0 available)
+2025-08-11T04:04:47.4410755Z   characters 1.3.0 (1.4.1 available)
+2025-08-11T04:04:47.4411302Z   clock 1.1.1 (1.1.2 available)
+2025-08-11T04:04:47.4411844Z   collection 1.18.0 (1.19.1 available)
+2025-08-11T04:04:47.4412642Z   crypto 3.0.3 (3.0.6 available)
+2025-08-11T04:04:47.4413175Z   fake_async 1.3.1 (1.3.3 available)
+2025-08-11T04:04:47.4413565Z   ffi 2.1.3 (2.1.4 available)
+2025-08-11T04:04:47.4414028Z   flutter_bloc 8.1.6 (9.1.1 available)
+2025-08-11T04:04:47.4414681Z   flutter_image_compress 2.3.0 (2.4.0 available)
+2025-08-11T04:04:47.4415426Z   flutter_image_compress_web 0.1.4+1 (0.1.5 available)
+2025-08-11T04:04:47.4416115Z   flutter_lints 3.0.2 (6.0.0 available)
+2025-08-11T04:04:47.4416857Z   flutter_plugin_android_lifecycle 2.0.19 (2.0.29 available)
+2025-08-11T04:04:47.4417561Z   http 0.13.6 (1.5.0 available)
+2025-08-11T04:04:47.4418110Z   http_parser 4.0.2 (4.1.2 available)
+2025-08-11T04:04:47.4418666Z   js 0.7.1 (0.7.2 available)
+2025-08-11T04:04:47.4419215Z   leak_tracker 10.0.0 (11.0.1 available)
+2025-08-11T04:04:47.4419897Z   leak_tracker_flutter_testing 2.0.1 (3.0.10 available)
+2025-08-11T04:04:47.4420618Z   leak_tracker_testing 2.0.1 (3.0.2 available)
+2025-08-11T04:04:47.4421222Z   lints 3.0.0 (6.0.0 available)
+2025-08-11T04:04:47.4421772Z   matcher 0.12.16+1 (0.12.17 available)
+2025-08-11T04:04:47.4422678Z   material_color_utilities 0.8.0 (0.13.0 available)
+2025-08-11T04:04:47.4423251Z   meta 1.11.0 (1.17.0 available)
+2025-08-11T04:04:47.4423786Z   path 1.9.0 (1.9.1 available)
+2025-08-11T04:04:47.4424304Z   path_provider 2.1.4 (2.1.5 available)
+2025-08-11T04:04:47.4424925Z   path_provider_android 2.2.4 (2.2.17 available)
+2025-08-11T04:04:47.4425592Z   permission_handler 11.3.1 (12.0.1 available)
+2025-08-11T04:04:47.4426328Z   permission_handler_android 12.0.13 (13.0.1 available)
+2025-08-11T04:04:47.4427166Z   permission_handler_platform_interface 4.2.3 (4.3.0 available)
+2025-08-11T04:04:47.4427906Z   petitparser 6.0.2 (7.0.0 available)
+2025-08-11T04:04:47.4428502Z   source_span 1.10.0 (1.10.1 available)
+2025-08-11T04:04:47.4429092Z   stack_trace 1.11.1 (1.12.1 available)
+2025-08-11T04:04:47.4429645Z   stream_channel 2.1.2 (2.1.4 available)
+2025-08-11T04:04:47.4430216Z   string_scanner 1.2.0 (1.4.1 available)
+2025-08-11T04:04:47.4430771Z   term_glyph 1.2.1 (1.2.2 available)
+2025-08-11T04:04:47.4431875Z   test_api 0.6.1 (0.7.7 available)
+2025-08-11T04:04:47.4432657Z   typed_data 1.3.2 (1.4.0 available)
+2025-08-11T04:04:47.4433202Z   vector_math 2.1.4 (2.2.0 available)
+2025-08-11T04:04:47.4433752Z   vm_service 13.0.0 (15.0.2 available)
+2025-08-11T04:04:47.4434276Z   web 0.5.1 (1.1.1 available)
+2025-08-11T04:04:47.4434777Z   xml 6.5.0 (6.6.0 available)
+2025-08-11T04:04:47.4435799Z Got dependencies!
+2025-08-11T04:04:47.4457023Z 46 packages have newer versions incompatible with dependency constraints.
+2025-08-11T04:04:47.4457960Z Try `flutter pub outdated` for more information.

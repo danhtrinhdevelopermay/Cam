@@ -25,18 +25,17 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
     
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.9),
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-            child: Column(
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.9),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Column(
+        children: [
+          // Header
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: Row(
               children: [
-                // Header
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
                       const Icon(
                         Icons.zoom_in,
                         color: Colors.white,
@@ -68,38 +67,35 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Device Capabilities
-                        _buildCapabilitiesSection(capabilities),
-                        
-                        const SizedBox(height: 24),
-                        
-                        // Enhancement Methods
-                        _buildEnhancementMethodsSection(),
-                        
-                        const SizedBox(height: 24),
-                        
-                        // Performance Settings
-                        _buildPerformanceSection(),
-                        
-                        const SizedBox(height: 100), // Bottom padding
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
-        ),
+          
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Device Capabilities
+                  _buildCapabilitiesSection(capabilities),
+                  
+                  const SizedBox(height: 24),
+                  
+                  // Enhancement Methods
+                  _buildEnhancementMethodsSection(),
+                  
+                  const SizedBox(height: 24),
+                  
+                  // Performance Settings
+                  _buildPerformanceSection(),
+                  
+                  const SizedBox(height: 100), // Bottom padding
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

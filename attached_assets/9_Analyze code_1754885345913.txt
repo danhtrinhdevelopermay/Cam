@@ -1,0 +1,48 @@
+﻿2025-08-11T04:04:35.6338145Z ##[group]Run flutter analyze --no-fatal-infos || echo "Analysis completed with warnings"
+2025-08-11T04:04:35.6338766Z [36;1mflutter analyze --no-fatal-infos || echo "Analysis completed with warnings"[0m
+2025-08-11T04:04:35.6379004Z shell: /usr/bin/bash -e {0}
+2025-08-11T04:04:35.6379261Z env:
+2025-08-11T04:04:35.6379567Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T04:04:35.6380054Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T04:04:35.6380495Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T04:04:35.6380855Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T04:04:35.6381131Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T04:04:35.6381418Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T04:04:35.6381678Z ##[endgroup]
+2025-08-11T04:04:46.4908226Z Analyzing Cam...                                                
+2025-08-11T04:04:46.4913630Z 
+2025-08-11T04:04:46.4954891Z warning • The operand can't be null, so the condition is always 'true' • lib/camera/advanced_zoom_controller.dart:282:11 • unnecessary_null_comparison
+2025-08-11T04:04:46.4957340Z warning • The operand can't be null, so the condition is always 'true' • lib/camera/advanced_zoom_controller.dart:293:22 • unnecessary_null_comparison
+2025-08-11T04:04:46.4960116Z    info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/advanced_zoom_controls.dart:2:8 • unnecessary_import
+2025-08-11T04:04:46.4962407Z   error • Expected to find ';' • lib/widgets/advanced_zoom_controls.dart:171:7 • expected_token
+2025-08-11T04:04:46.4963869Z warning • Dead code • lib/widgets/advanced_zoom_controls.dart:171:8 • dead_code
+2025-08-11T04:04:46.4965310Z   error • Expected an identifier • lib/widgets/advanced_zoom_controls.dart:171:8 • missing_identifier
+2025-08-11T04:04:46.4966806Z   error • Expected to find ';' • lib/widgets/advanced_zoom_controls.dart:171:8 • expected_token
+2025-08-11T04:04:46.4968289Z   error • Unexpected text ';' • lib/widgets/advanced_zoom_controls.dart:171:8 • unexpected_token
+2025-08-11T04:04:46.4969816Z   error • Expected an identifier • lib/widgets/advanced_zoom_controls.dart:172:5 • missing_identifier
+2025-08-11T04:04:46.4971348Z   error • Unexpected text ';' • lib/widgets/advanced_zoom_controls.dart:172:5 • unexpected_token
+2025-08-11T04:04:46.4973125Z   error • Expected to find ';' • lib/widgets/advanced_zoom_controls.dart:233:7 • expected_token
+2025-08-11T04:04:46.4974470Z warning • Dead code • lib/widgets/advanced_zoom_controls.dart:233:8 • dead_code
+2025-08-11T04:04:46.4976317Z   error • Expected an identifier • lib/widgets/advanced_zoom_controls.dart:233:8 • missing_identifier
+2025-08-11T04:04:46.4977800Z   error • Expected to find ';' • lib/widgets/advanced_zoom_controls.dart:233:8 • expected_token
+2025-08-11T04:04:46.4979222Z   error • Unexpected text ';' • lib/widgets/advanced_zoom_controls.dart:233:8 • unexpected_token
+2025-08-11T04:04:46.4980783Z   error • Expected an identifier • lib/widgets/advanced_zoom_controls.dart:234:5 • missing_identifier
+2025-08-11T04:04:46.4982488Z   error • Unexpected text ';' • lib/widgets/advanced_zoom_controls.dart:234:5 • unexpected_token
+2025-08-11T04:04:46.4984913Z    info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/camera_controls.dart:2:8 • unnecessary_import
+2025-08-11T04:04:46.4987991Z    info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/zoom_settings_panel.dart:2:8 • unnecessary_import
+2025-08-11T04:04:46.4990091Z   error • Expected to find ';' • lib/widgets/zoom_settings_panel.dart:102:9 • expected_token
+2025-08-11T04:04:46.4991438Z warning • Dead code • lib/widgets/zoom_settings_panel.dart:102:10 • dead_code
+2025-08-11T04:04:46.4993040Z   error • Expected an identifier • lib/widgets/zoom_settings_panel.dart:102:10 • missing_identifier
+2025-08-11T04:04:46.4994901Z   error • Expected to find ';' • lib/widgets/zoom_settings_panel.dart:102:10 • expected_token
+2025-08-11T04:04:46.4996368Z   error • Unexpected text ';' • lib/widgets/zoom_settings_panel.dart:102:10 • unexpected_token
+2025-08-11T04:04:46.4997868Z   error • Expected an identifier • lib/widgets/zoom_settings_panel.dart:103:7 • missing_identifier
+2025-08-11T04:04:46.4999355Z   error • Expected to find ';' • lib/widgets/zoom_settings_panel.dart:103:7 • expected_token
+2025-08-11T04:04:46.5000791Z   error • Unexpected text ';' • lib/widgets/zoom_settings_panel.dart:103:7 • unexpected_token
+2025-08-11T04:04:46.5002532Z   error • Expected an identifier • lib/widgets/zoom_settings_panel.dart:103:8 • missing_identifier
+2025-08-11T04:04:46.5003986Z   error • Expected to find ';' • lib/widgets/zoom_settings_panel.dart:103:8 • expected_token
+2025-08-11T04:04:46.5005364Z   error • Unexpected text ';' • lib/widgets/zoom_settings_panel.dart:103:8 • unexpected_token
+2025-08-11T04:04:46.5006873Z   error • Expected an identifier • lib/widgets/zoom_settings_panel.dart:104:5 • missing_identifier
+2025-08-11T04:04:46.5008300Z   error • Unexpected text ';' • lib/widgets/zoom_settings_panel.dart:104:5 • unexpected_token
+2025-08-11T04:04:46.5008886Z 
+2025-08-11T04:04:46.5107790Z 32 issues found. (ran in 10.1s)
+2025-08-11T04:04:46.5169204Z Analysis completed with warnings

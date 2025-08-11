@@ -1,0 +1,59 @@
+﻿2025-08-11T04:04:26.8117323Z ##[group]Run flutter test || echo "Tests completed"
+2025-08-11T04:04:26.8117718Z [36;1mflutter test || echo "Tests completed"[0m
+2025-08-11T04:04:26.8157908Z shell: /usr/bin/bash -e {0}
+2025-08-11T04:04:26.8158155Z env:
+2025-08-11T04:04:26.8158462Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T04:04:26.8158989Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T04:04:26.8159441Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T04:04:26.8159784Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T04:04:26.8160084Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T04:04:26.8160369Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T04:04:26.8160649Z ##[endgroup]
+2025-08-11T04:04:27.6403569Z 
+2025-08-11T04:04:32.5538105Z lib/widgets/advanced_zoom_controls.dart:171:7: Error: Expected ';' after this.
+2025-08-11T04:04:32.5538948Z       ),
+2025-08-11T04:04:32.5539273Z       ^
+2025-08-11T04:04:32.5540249Z lib/widgets/advanced_zoom_controls.dart:171:8: Error: Expected an identifier, but got ','.
+2025-08-11T04:04:32.5541472Z Try inserting an identifier before ','.
+2025-08-11T04:04:32.5541959Z       ),
+2025-08-11T04:04:32.5542462Z        ^
+2025-08-11T04:04:32.5543269Z lib/widgets/advanced_zoom_controls.dart:171:8: Error: Unexpected token ';'.
+2025-08-11T04:04:32.5543970Z       ),
+2025-08-11T04:04:32.5544297Z        ^
+2025-08-11T04:04:32.5545218Z lib/widgets/advanced_zoom_controls.dart:172:5: Error: Expected an identifier, but got ')'.
+2025-08-11T04:04:32.5546104Z Try inserting an identifier before ')'.
+2025-08-11T04:04:32.5546589Z     );
+2025-08-11T04:04:32.5546895Z     ^
+2025-08-11T04:04:32.5547702Z lib/widgets/advanced_zoom_controls.dart:171:8: Error: Expected ';' after this.
+2025-08-11T04:04:32.5548407Z       ),
+2025-08-11T04:04:32.5548736Z        ^
+2025-08-11T04:04:32.5550666Z lib/widgets/advanced_zoom_controls.dart:172:5: Error: Unexpected token ';'.
+2025-08-11T04:04:32.5551917Z     );
+2025-08-11T04:04:32.5553030Z     ^
+2025-08-11T04:04:32.5555087Z lib/widgets/advanced_zoom_controls.dart:233:7: Error: Expected ';' after this.
+2025-08-11T04:04:32.5555825Z       ),
+2025-08-11T04:04:32.5556155Z       ^
+2025-08-11T04:04:32.5557068Z lib/widgets/advanced_zoom_controls.dart:233:8: Error: Expected an identifier, but got ','.
+2025-08-11T04:04:32.5558000Z Try inserting an identifier before ','.
+2025-08-11T04:04:32.5559574Z       ),
+2025-08-11T04:04:32.5560177Z        ^
+2025-08-11T04:04:32.5561022Z lib/widgets/advanced_zoom_controls.dart:233:8: Error: Unexpected token ';'.
+2025-08-11T04:04:32.5561689Z       ),
+2025-08-11T04:04:32.5562003Z        ^
+2025-08-11T04:04:32.5563159Z lib/widgets/advanced_zoom_controls.dart:234:5: Error: Expected an identifier, but got ')'.
+2025-08-11T04:04:32.5564055Z Try inserting an identifier before ')'.
+2025-08-11T04:04:32.5564524Z     );
+2025-08-11T04:04:32.5564839Z     ^
+2025-08-11T04:04:32.5565644Z lib/widgets/advanced_zoom_controls.dart:233:8: Error: Expected ';' after this.
+2025-08-11T04:04:32.5566400Z       ),
+2025-08-11T04:04:32.5566730Z        ^
+2025-08-11T04:04:32.5567516Z lib/widgets/advanced_zoom_controls.dart:234:5: Error: Unexpected token ';'.
+2025-08-11T04:04:32.5568196Z     );
+2025-08-11T04:04:32.5568486Z     ^
+2025-08-11T04:04:35.5801901Z ##[group]❌ loading /home/runner/work/Cam/Cam/test/widget_test.dart (failed)
+2025-08-11T04:04:35.5814764Z Failed to load "/home/runner/work/Cam/Cam/test/widget_test.dart": Compilation failed for testPath=/home/runner/work/Cam/Cam/test/widget_test.dart
+2025-08-11T04:04:35.5821240Z 
+2025-08-11T04:04:35.5821694Z ##[endgroup]
+2025-08-11T04:04:35.5860671Z 
+2025-08-11T04:04:35.5877998Z ##[error]0 tests passed, 1 failed.
+2025-08-11T04:04:35.6313238Z Tests completed
