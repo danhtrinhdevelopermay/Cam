@@ -1,0 +1,39 @@
+﻿2025-08-11T08:59:58.7944237Z ##[group]Run flutter analyze --no-fatal-infos || echo "Analysis completed with warnings"
+2025-08-11T08:59:58.7945113Z [36;1mflutter analyze --no-fatal-infos || echo "Analysis completed with warnings"[0m
+2025-08-11T08:59:58.7991544Z shell: /usr/bin/bash -e {0}
+2025-08-11T08:59:58.7991918Z env:
+2025-08-11T08:59:58.7992374Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T08:59:58.7993202Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T08:59:58.7993998Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T08:59:58.7994646Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T08:59:58.7995137Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T08:59:58.7995648Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T08:59:58.7996119Z ##[endgroup]
+2025-08-11T09:00:11.8961008Z Analyzing Cam...                                                
+2025-08-11T09:00:11.8966871Z 
+2025-08-11T09:00:11.9022927Z warning • The operand can't be null, so the condition is always 'true' • lib/camera/advanced_zoom_controller.dart:282:11 • unnecessary_null_comparison
+2025-08-11T09:00:11.9026928Z warning • The operand can't be null, so the condition is always 'true' • lib/camera/advanced_zoom_controller.dart:293:22 • unnecessary_null_comparison
+2025-08-11T09:00:11.9030262Z warning • The value of the field '_currentVideoPath' isn't used • lib/screens/camera_screen.dart:56:11 • unused_field
+2025-08-11T09:00:11.9032085Z   error • The name 'dispose' is already defined • lib/screens/camera_screen.dart:907:8 • duplicate_definition
+2025-08-11T09:00:11.9033979Z warning • Unused import: 'package:http/http.dart' • lib/video/frame_interpolation_service.dart:4:8 • unused_import
+2025-08-11T09:00:11.9035957Z warning • The value of the field '_filmModelUrl' isn't used • lib/video/frame_interpolation_service.dart:12:23 • unused_field
+2025-08-11T09:00:11.9037582Z    info • The declaration '_interpolateWithFilmModel' isn't referenced • lib/video/frame_interpolation_service.dart:155:16 • unused_element
+2025-08-11T09:00:11.9039159Z    info • The declaration '_runFrameInterpolationInIsolate' isn't referenced • lib/video/frame_interpolation_service.dart:166:16 • unused_element
+2025-08-11T09:00:11.9040391Z   error • Undefined class 'Size' • lib/video/frame_interpolation_service.dart:222:28 • undefined_class
+2025-08-11T09:00:11.9041598Z   error • Undefined name 'width' • lib/video/frame_interpolation_service.dart:224:22 • undefined_identifier
+2025-08-11T09:00:11.9042801Z   error • Undefined name 'height' • lib/video/frame_interpolation_service.dart:224:37 • undefined_identifier
+2025-08-11T09:00:11.9044206Z   error • Undefined name 'width' • lib/video/frame_interpolation_service.dart:225:25 • undefined_identifier
+2025-08-11T09:00:11.9045179Z   error • Undefined name 'height' • lib/video/frame_interpolation_service.dart:226:26 • undefined_identifier
+2025-08-11T09:00:11.9046416Z   error • Arguments of a constant creation must be constant expressions • lib/video/video_recording_controller.dart:8:10 • const_with_non_constant_argument
+2025-08-11T09:00:11.9047806Z   error • The function 'Size' isn't defined • lib/video/video_recording_controller.dart:8:10 • undefined_function
+2025-08-11T09:00:11.9049057Z   error • Arguments of a constant creation must be constant expressions • lib/video/video_recording_controller.dart:9:15 • const_with_non_constant_argument
+2025-08-11T09:00:11.9050203Z   error • The function 'Size' isn't defined • lib/video/video_recording_controller.dart:9:15 • undefined_function
+2025-08-11T09:00:11.9051076Z   error • Undefined class 'Size' • lib/video/video_recording_controller.dart:12:9 • undefined_class
+2025-08-11T09:00:11.9052090Z   error • This expression has a type of 'void' so its value can't be used • lib/video/video_recording_controller.dart:87:14 • use_of_void_result
+2025-08-11T09:00:11.9053134Z warning • Unused import: 'blur_overlay.dart' • lib/widgets/advanced_zoom_controls.dart:3:8 • unused_import
+2025-08-11T09:00:11.9054225Z warning • The value of the local variable 'controller' isn't used • lib/widgets/advanced_zoom_controls.dart:320:11 • unused_local_variable
+2025-08-11T09:00:11.9056033Z    info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/camera_controls.dart:2:8 • unnecessary_import
+2025-08-11T09:00:11.9057940Z    info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/zoom_settings_panel.dart:2:8 • unnecessary_import
+2025-08-11T09:00:11.9058675Z 
+2025-08-11T09:00:11.9201696Z 23 issues found. (ran in 12.2s)
+2025-08-11T09:00:11.9294162Z Analysis completed with warnings

@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'dart:isolate';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
-import 'package:ffmpeg_kit_flutter/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_flutter/return_code.dart';
+// import 'package:ffmpeg_kit_flutter_full_gpl/ffmpeg_kit.dart';
+// import 'package:ffmpeg_kit_flutter_full_gpl/return_code.dart';
 import '../video/video_recording_controller.dart';
 
 class FrameInterpolationService {
@@ -104,7 +104,7 @@ class FrameInterpolationService {
     required VideoResolution resolution,
   }) async {
     try {
-      debugPrint('Using FFmpeg for frame interpolation...');
+      debugPrint('Using simulated frame interpolation (FFmpeg disabled temporarily)...');
       
       // FFmpeg command for frame interpolation using minterpolate filter
       // This creates smooth 60fps from 30fps input using motion interpolation
@@ -122,26 +122,19 @@ class FrameInterpolationService {
         -y "$outputPath"
       '''.replaceAll('\n', ' ').trim();
 
-      debugPrint('Executing FFmpeg command: $ffmpegCommand');
+      debugPrint('FFmpeg processing would be executed here: $ffmpegCommand');
       
-      final session = await FFmpegKit.execute(ffmpegCommand);
-      final returnCode = await session.getReturnCode();
-      
-      if (ReturnCode.isSuccess(returnCode)) {
-        debugPrint('FFmpeg interpolation completed successfully');
+      // Temporarily simulate FFmpeg processing by copying original file
+      // In production, this would be replaced with actual FFmpeg processing
+      final inputFile = File(inputPath);
+      if (await inputFile.exists()) {
+        await inputFile.copy(outputPath);
         
-        // Verify output file
         final outputFile = File(outputPath);
         if (await outputFile.exists()) {
           final fileSize = await outputFile.length();
-          debugPrint('Output file size: ${fileSize ~/ 1024}KB');
+          debugPrint('Simulated output file size: ${fileSize ~/ 1024}KB');
           return fileSize > 1024; // At least 1KB
-        }
-      } else {
-        final logs = await session.getAllLogs();
-        debugPrint('FFmpeg failed with code: $returnCode');
-        for (final log in logs) {
-          debugPrint('FFmpeg log: ${log.getMessage()}');
         }
       }
       

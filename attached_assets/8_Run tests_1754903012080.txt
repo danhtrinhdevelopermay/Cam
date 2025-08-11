@@ -1,0 +1,43 @@
+﻿2025-08-11T08:59:47.8792634Z ##[group]Run flutter test || echo "Tests completed"
+2025-08-11T08:59:47.8793375Z [36;1mflutter test || echo "Tests completed"[0m
+2025-08-11T08:59:47.8857649Z shell: /usr/bin/bash -e {0}
+2025-08-11T08:59:47.8858158Z env:
+2025-08-11T08:59:47.8858786Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T08:59:47.8859889Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T08:59:47.8860913Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T08:59:47.8861665Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T08:59:47.8862332Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T08:59:47.8863046Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T08:59:47.8863705Z ##[endgroup]
+2025-08-11T08:59:48.8361636Z 
+2025-08-11T08:59:49.4663924Z lib/screens/camera_screen.dart:907:8: Error: 'dispose' is already declared in this scope.
+2025-08-11T08:59:49.4665436Z   void dispose() {
+2025-08-11T08:59:49.4666020Z        ^^^^^^^
+2025-08-11T08:59:49.4667850Z lib/screens/camera_screen.dart:177:8: Context: Previous declaration of 'dispose'.
+2025-08-11T08:59:49.4669127Z   void dispose() {
+2025-08-11T08:59:49.4669701Z        ^^^^^^^
+2025-08-11T08:59:50.5572795Z lib/video/video_recording_controller.dart:12:9: Error: Type 'Size' not found.
+2025-08-11T08:59:50.5573982Z   final Size size;
+2025-08-11T08:59:50.5574334Z         ^^^^
+2025-08-11T08:59:50.5587725Z lib/video/frame_interpolation_service.dart:222:28: Error: Type 'Size' not found.
+2025-08-11T08:59:50.5588558Z extension SizeExtension on Size {
+2025-08-11T08:59:50.5589326Z                            ^^^^
+2025-08-11T08:59:51.3544452Z lib/video/video_recording_controller.dart:8:10: Error: Method not found: 'Size'.
+2025-08-11T08:59:51.3546207Z   hd720p(Size(1280, 720), '720p'),
+2025-08-11T08:59:51.3547336Z          ^^^^
+2025-08-11T08:59:51.3548999Z lib/video/video_recording_controller.dart:9:15: Error: Method not found: 'Size'.
+2025-08-11T08:59:51.3550671Z   fullHd1080p(Size(1920, 1080), '1080p');
+2025-08-11T08:59:51.3551694Z               ^^^^
+2025-08-11T08:59:54.7214041Z lib/video/video_recording_controller.dart:12:9: Error: 'Size' isn't a type.
+2025-08-11T08:59:54.7215057Z   final Size size;
+2025-08-11T08:59:54.7215497Z         ^^^^
+2025-08-11T08:59:54.7218260Z lib/video/video_recording_controller.dart:87:14: Error: This expression has type 'void' and can't be used.
+2025-08-11T08:59:54.7219655Z              await _cameraController!.initialize(); // Basic support check
+2025-08-11T08:59:54.7220250Z              ^
+2025-08-11T08:59:58.7345332Z ##[group]❌ loading /home/runner/work/Cam/Cam/test/widget_test.dart (failed)
+2025-08-11T08:59:58.7357808Z Failed to load "/home/runner/work/Cam/Cam/test/widget_test.dart": Compilation failed for testPath=/home/runner/work/Cam/Cam/test/widget_test.dart
+2025-08-11T08:59:58.7364830Z 
+2025-08-11T08:59:58.7367941Z ##[endgroup]
+2025-08-11T08:59:58.7431197Z 
+2025-08-11T08:59:58.7451603Z ##[error]0 tests passed, 1 failed.
+2025-08-11T08:59:58.7907761Z Tests completed

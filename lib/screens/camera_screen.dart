@@ -179,6 +179,7 @@ class _CameraScreenState extends State<CameraScreen>
     _cameraController?.dispose();
     _animationController.dispose();
     _advancedZoomController.dispose();
+    _videoRecordingController.dispose();
     super.dispose();
   }
 
@@ -903,13 +904,5 @@ class _CameraScreenState extends State<CameraScreen>
     }
   }
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    _cameraController?.dispose();
-    _advancedZoomController.dispose();
-    _videoRecordingController.dispose();
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+
 }

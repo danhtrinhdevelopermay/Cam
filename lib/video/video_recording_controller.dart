@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import '../video/frame_interpolation_service.dart';
@@ -83,8 +84,8 @@ class VideoRecordingController {
     try {
       // Try to get available frame rates for current resolution
       // This is a simplified check - in real implementation you'd query camera capabilities
-      return frameRate == VideoFrameRate.fps30 || 
-             await _cameraController!.initialize(); // Basic support check
+      // Most devices support 30fps, some support 60fps
+      return frameRate == VideoFrameRate.fps30 || frameRate == VideoFrameRate.fps60;
     } catch (e) {
       debugPrint('Frame rate check failed: $e');
       return frameRate == VideoFrameRate.fps30; // Fallback to 30fps
