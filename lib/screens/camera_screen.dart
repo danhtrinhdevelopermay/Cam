@@ -92,10 +92,10 @@ class _CameraScreenState extends State<CameraScreen>
   Future<void> _initializeCameraFast() async {
     if (widget.cameras.isEmpty) return;
 
-    // Use high resolution for quality but faster initialization
+    // Use medium resolution to avoid aspect ratio issues
     _cameraController = CameraController(
       widget.cameras[_selectedCameraIndex],
-      ResolutionPreset.high, // Use high instead of max for faster startup
+      ResolutionPreset.medium, // Medium for better aspect ratio compatibility
       enableAudio: true,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
@@ -327,13 +327,41 @@ class _CameraScreenState extends State<CameraScreen>
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // Camera Preview - Proper Aspect Ratio
+          // Camera Preview - Full Screen with Proper Scaling
           if (_isCameraInitialized)
-            SizedBox.expand(
-              child: AspectRatio(
-                aspectRatio: _cameraController!.value.aspectRatio,
-                child: CameraPreview(_cameraController!),
-              ),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final cameraAspectRatio = _cameraController!.value.aspectRatio;
+                final screenWidth = constraints.maxWidth;
+                final screenHeight = constraints.maxHeight;
+                final screenAspectRatio = screenWidth / screenHeight;
+                
+                print('Camera aspect ratio: $cameraAspectRatio');
+                print('Screen aspect ratio: $screenAspectRatio');
+                
+                // Try to fix stretching by using proper Transform.scale
+                double scale = 1.0;
+                if (cameraAspectRatio < screenAspectRatio) {
+                  // Camera is taller, fit width and scale height
+                  scale = screenHeight / (screenWidth / cameraAspectRatio);
+                } else {
+                  // Camera is wider, fit height and scale width  
+                  scale = screenWidth / (screenHeight * cameraAspectRatio);
+                }
+                
+                print('Calculated scale: $scale');
+                
+                return Center(
+                  child: Transform.scale(
+                    scale: scale,
+                    child: SizedBox(
+                      width: screenWidth,
+                      height: screenWidth / cameraAspectRatio,
+                      child: CameraPreview(_cameraController!),
+                    ),
+                  ),
+                );
+              },
             )
           else
             Container(
