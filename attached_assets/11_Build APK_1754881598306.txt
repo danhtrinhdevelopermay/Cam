@@ -1,0 +1,50 @@
+﻿2025-08-11T03:03:52.3325200Z ##[group]Run flutter build apk --release
+2025-08-11T03:03:52.3325534Z [36;1mflutter build apk --release[0m
+2025-08-11T03:03:52.3365464Z shell: /usr/bin/bash -e {0}
+2025-08-11T03:03:52.3365715Z env:
+2025-08-11T03:03:52.3366016Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T03:03:52.3366699Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T03:03:52.3367219Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T03:03:52.3367589Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T03:03:52.3367876Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T03:03:52.3368361Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T03:03:52.3368640Z ##[endgroup]
+2025-08-11T03:03:52.8384726Z 
+2025-08-11T03:05:16.0878474Z Running Gradle task 'assembleRelease'...                        
+2025-08-11T03:05:16.0880059Z Checking the license for package Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/licenses
+2025-08-11T03:05:16.0882238Z License for package Android SDK Build-Tools 30.0.3 accepted.
+2025-08-11T03:05:16.0883119Z Preparing "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)".
+2025-08-11T03:05:17.3749161Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" ready.
+2025-08-11T03:05:17.3750695Z Installing Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/build-tools/30.0.3
+2025-08-11T03:05:17.3753570Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" complete.
+2025-08-11T03:05:17.4746816Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" finished.
+2025-08-11T03:05:17.6738275Z Checking the license for package Android SDK Platform 30 in /usr/local/lib/android/sdk/licenses
+2025-08-11T03:05:17.6739911Z License for package Android SDK Platform 30 accepted.
+2025-08-11T03:05:17.6744918Z Preparing "Install Android SDK Platform 30 (revision: 3)".
+2025-08-11T03:05:20.2738457Z "Install Android SDK Platform 30 (revision: 3)" ready.
+2025-08-11T03:05:20.2745096Z Installing Android SDK Platform 30 in /usr/local/lib/android/sdk/platforms/android-30
+2025-08-11T03:05:20.2751439Z "Install Android SDK Platform 30 (revision: 3)" complete.
+2025-08-11T03:05:20.2757345Z "Install Android SDK Platform 30 (revision: 3)" finished.
+2025-08-11T03:05:41.6778539Z lib/widgets/mode_selector.dart:25:21: Error: Can't find ')' to match '('.
+2025-08-11T03:05:41.6779683Z     return Container(
+2025-08-11T03:05:41.6780226Z                     ^
+2025-08-11T03:05:52.2752153Z Target kernel_snapshot failed: Exception
+2025-08-11T03:05:52.2758403Z 
+2025-08-11T03:05:52.2762386Z 
+2025-08-11T03:05:52.2765493Z FAILURE: Build failed with an exception.
+2025-08-11T03:05:52.2768779Z 
+2025-08-11T03:05:52.2782691Z * What went wrong:
+2025-08-11T03:05:52.2783732Z Execution failed for task ':app:compileFlutterBuildRelease'.
+2025-08-11T03:05:52.2785244Z > Process 'command '/opt/hostedtoolcache/flutter/stable-3.19.6-x64/bin/flutter'' finished with non-zero exit value 1
+2025-08-11T03:05:52.2787064Z 
+2025-08-11T03:05:52.2787492Z * Try:
+2025-08-11T03:05:52.2788310Z > Run with --stacktrace option to get the stack trace.
+2025-08-11T03:05:52.2789854Z > Run with --info or --debug option to get more log output.
+2025-08-11T03:05:52.2790894Z > Run with --scan to get full insights.
+2025-08-11T03:05:52.2791432Z 
+2025-08-11T03:05:52.2791909Z * Get more help at https://help.gradle.org
+2025-08-11T03:05:52.2792445Z 
+2025-08-11T03:05:52.2792748Z BUILD FAILED in 1m 59s
+2025-08-11T03:05:52.7217852Z Running Gradle task 'assembleRelease'...                          119.8s
+2025-08-11T03:05:52.7259669Z Gradle task assembleRelease failed with exit code 1
+2025-08-11T03:05:52.7319644Z ##[error]Process completed with exit code 1.

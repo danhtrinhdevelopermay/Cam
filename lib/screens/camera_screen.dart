@@ -15,7 +15,7 @@ import '../widgets/color_settings_panel.dart';
 import '../camera/advanced_zoom_controller.dart';
 import '../camera/color_processing_controller.dart';
 import '../camera/hdr_capture_controller.dart';
-import 'dart:ui';
+
 
 class CameraScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -220,17 +220,7 @@ class _CameraScreenState extends State<CameraScreen>
     }
   }
 
-  Future<void> _switchCamera() async {
-    if (widget.cameras.length < 2) return;
 
-    setState(() {
-      _selectedCameraIndex = (_selectedCameraIndex + 1) % widget.cameras.length;
-      _isCameraInitialized = false;
-    });
-
-    await _cameraController?.dispose();
-    await _initializeCamera();
-  }
 
   Future<void> _initializeAdvancedZoom() async {
     await _advancedZoomController.initialize(widget.cameras);

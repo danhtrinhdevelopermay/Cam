@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'blur_overlay.dart';
 
 class ModeSelector extends StatelessWidget {
@@ -25,7 +24,7 @@ class ModeSelector extends StatelessWidget {
     return Container(
       height: 32,
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: iOS18GlassEffect(
+      child: GlassEffect(
         borderRadius: BorderRadius.circular(20),
         blur: 20.0,
         opacity: 0.25,
@@ -67,6 +66,7 @@ class ModeSelector extends StatelessWidget {
             );
           },
         ),
+      ),
     );
   }
 }

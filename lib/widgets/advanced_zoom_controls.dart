@@ -89,53 +89,6 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
     );
   }
 
-  /// Build zoom method status indicator
-  Widget _buildZoomMethodStatus() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            _getZoomMethodIcon(),
-            size: 16,
-            color: Colors.white,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            widget.zoomController.getCurrentZoomMethodDescription(),
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(width: 8),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                _showEnhancementSettings = !_showEnhancementSettings;
-              });
-            },
-            child: Icon(
-              Icons.settings,
-              size: 16,
-              color: Colors.white.withOpacity(0.7),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   /// Get appropriate icon for current zoom method
   IconData _getZoomMethodIcon() {
     final controller = widget.zoomController;
