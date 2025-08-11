@@ -1,0 +1,17 @@
+﻿2025-08-11T00:44:51.4318089Z ##[group]Run flutter analyze --no-fatal-infos
+2025-08-11T00:44:51.4318464Z [36;1mflutter analyze --no-fatal-infos[0m
+2025-08-11T00:44:51.4357876Z shell: /usr/bin/bash -e {0}
+2025-08-11T00:44:51.4358112Z env:
+2025-08-11T00:44:51.4358711Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T00:44:51.4359173Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T00:44:51.4359811Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T00:44:51.4360130Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T00:44:51.4360361Z ##[endgroup]
+2025-08-11T00:44:59.9491889Z Analyzing Cam...                                                
+2025-08-11T00:44:59.9497778Z 
+2025-08-11T00:44:59.9529322Z    info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/screens/camera_screen.dart:1:8 • unnecessary_import
+2025-08-11T00:44:59.9532135Z warning • The asset directory 'assets/icons/' doesn't exist • pubspec.yaml:30:7 • asset_directory_does_not_exist
+2025-08-11T00:44:59.9533536Z warning • The asset directory 'assets/images/' doesn't exist • pubspec.yaml:31:7 • asset_directory_does_not_exist
+2025-08-11T00:44:59.9539920Z 
+2025-08-11T00:44:59.9657066Z 3 issues found. (ran in 7.8s)
+2025-08-11T00:44:59.9749232Z ##[error]Process completed with exit code 1.
