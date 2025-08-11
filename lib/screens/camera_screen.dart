@@ -98,33 +98,56 @@ class _CameraScreenState extends State<CameraScreen>
   }
 
   Future<void> _initializeCameraFast() async {
-    if (widget.cameras.isEmpty) return;
-
-    // Use medium resolution to avoid aspect ratio issues
-    _cameraController = CameraController(
-      widget.cameras[_selectedCameraIndex],
-      ResolutionPreset.medium, // Medium for better aspect ratio compatibility
-      enableAudio: true,
-      imageFormatGroup: ImageFormatGroup.jpeg,
-    );
+    if (widget.cameras.isEmpty) {
+      print('No cameras available');
+      return;
+    }
 
     try {
-      // Initialize camera with minimal blocking operations
-      await _cameraController!.initialize();
+      print('Starting camera initialization with ${widget.cameras.length} cameras...');
+      print('Selected camera index: $_selectedCameraIndex');
+      print('Camera: ${widget.cameras[_selectedCameraIndex].name}');
       
-      setState(() {
-        _isCameraInitialized = true;
-      });
+      // Use medium resolution to avoid aspect ratio issues
+      _cameraController = CameraController(
+        widget.cameras[_selectedCameraIndex],
+        ResolutionPreset.medium,
+        enableAudio: true,
+        imageFormatGroup: ImageFormatGroup.jpeg,
+      );
+
+      // Initialize camera with timeout
+      await _cameraController!.initialize().timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception('Camera initialization timeout');
+        },
+      );
       
-      // Configure advanced features after camera is visible
-      _configureAdvancedFeaturesAsync();
+      print('Camera initialized successfully, checking state...');
+      print('Camera value: ${_cameraController!.value}');
+      print('Is initialized: ${_cameraController!.value.isInitialized}');
       
-      // Initialize video recording controller with camera
-      _videoRecordingController.setCameraController(_cameraController!);
+      if (mounted && _cameraController!.value.isInitialized) {
+        setState(() {
+          _isCameraInitialized = true;
+        });
+        
+        print('State updated, _isCameraInitialized = $_isCameraInitialized');
+        
+        // Configure advanced features after camera is visible
+        _configureAdvancedFeaturesAsync();
+        
+        // Initialize video recording controller with camera
+        _videoRecordingController.setCameraController(_cameraController!);
+      } else {
+        print('Camera not properly initialized or widget not mounted');
+      }
       
     } catch (e) {
       print('Camera initialization error: $e');
-      // Fallback with lower resolution for compatibility
+      print('Stack trace: ${StackTrace.current}');
+      // Fallback with different settings
       _initializeCameraFallback();
     }
   }
@@ -150,21 +173,38 @@ class _CameraScreenState extends State<CameraScreen>
   Future<void> _initializeCameraFallback() async {
     if (widget.cameras.isEmpty) return;
 
-    _cameraController = CameraController(
-      widget.cameras[_selectedCameraIndex],
-      ResolutionPreset.medium, // Lower resolution for compatibility
-      enableAudio: false, // Disable audio for faster startup
-      imageFormatGroup: ImageFormatGroup.jpeg,
-    );
-
     try {
-      await _cameraController!.initialize();
-      setState(() {
-        _isCameraInitialized = true;
-      });
-      _configureAdvancedFeaturesAsync();
+      print('Starting fallback camera initialization...');
+      
+      _cameraController = CameraController(
+        widget.cameras[_selectedCameraIndex],
+        ResolutionPreset.low, // Even lower resolution for compatibility
+        enableAudio: false, // Disable audio for faster startup
+        imageFormatGroup: ImageFormatGroup.jpeg,
+      );
+
+      await _cameraController!.initialize().timeout(
+        const Duration(seconds: 15),
+        onTimeout: () {
+          throw Exception('Fallback camera initialization timeout');
+        },
+      );
+      
+      if (mounted && _cameraController!.value.isInitialized) {
+        setState(() {
+          _isCameraInitialized = true;
+        });
+        print('Fallback camera initialized successfully');
+        _configureAdvancedFeaturesAsync();
+      }
     } catch (e) {
       print('Camera fallback initialization error: $e');
+      // Show error message to user
+      if (mounted) {
+        setState(() {
+          _isCameraInitialized = false;
+        });
+      }
     }
   }
 
@@ -399,23 +439,30 @@ class _CameraScreenState extends State<CameraScreen>
       body: Stack(
         children: [
           // Camera Preview - Full Screen 
-          if (_isCameraInitialized && _cameraController != null)
+          if (_isCameraInitialized && _cameraController != null && _cameraController!.value.isInitialized)
             Positioned.fill(
-              child: FittedBox(
-                fit: BoxFit.cover,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: CameraPreview(_cameraController!),
-                ),
-              ),
+              child: CameraPreview(_cameraController!),
             )
           else
             Container(
               color: Colors.black,
-              child: const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      _getCameraStatusText(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -869,6 +916,22 @@ class _CameraScreenState extends State<CameraScreen>
           ),
       ],
     );
+  }
+
+  String _getCameraStatusText() {
+    if (_cameraController == null) {
+      return 'Initializing camera...';
+    }
+    
+    if (!_isCameraInitialized) {
+      return 'Starting camera...';
+    }
+    
+    if (!_cameraController!.value.isInitialized) {
+      return 'Camera not ready...';
+    }
+    
+    return 'Camera ready...';
   }
 
   Future<void> _switchCamera() async {

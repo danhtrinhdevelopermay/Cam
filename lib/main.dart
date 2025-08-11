@@ -33,10 +33,18 @@ Future<void> main() async {
 
 Future<List<CameraDescription>> _initializeCameras() async {
   try {
+    print('Attempting to initialize cameras...');
     final cameras = await availableCameras();
+    print('Found ${cameras.length} cameras');
+    for (int i = 0; i < cameras.length; i++) {
+      print('Camera $i: ${cameras[i].name} - ${cameras[i].lensDirection}');
+    }
     return cameras;
   } on CameraException catch (e) {
-    print('Error: ${e.code}\nError Message: ${e.description}');
+    print('Camera Error: ${e.code}\nError Message: ${e.description}');
+    return [];
+  } catch (e) {
+    print('Unexpected camera error: $e');
     return [];
   }
 }
