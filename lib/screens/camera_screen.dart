@@ -398,18 +398,15 @@ class _CameraScreenState extends State<CameraScreen>
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // Camera Preview - Full Screen with Proper Scaling
-          if (_isCameraInitialized)
+          // Camera Preview - Full Screen 
+          if (_isCameraInitialized && _cameraController != null)
             Positioned.fill(
-              child: OverflowBox(
-                alignment: Alignment.center,
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width * _cameraController!.value.aspectRatio,
-                    child: CameraPreview(_cameraController!),
-                  ),
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: CameraPreview(_cameraController!),
                 ),
               ),
             )
