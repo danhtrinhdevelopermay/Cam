@@ -11,6 +11,7 @@ import '../widgets/mode_selector.dart';
 import '../widgets/aspect_ratio_selector.dart';
 import '../widgets/advanced_zoom_controls.dart';
 import '../camera/advanced_zoom_controller.dart';
+import 'dart:ui';
 
 class CameraScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -289,82 +290,46 @@ class _CameraScreenState extends State<CameraScreen>
             },
           ),
 
-          // Top Controls
+          // Top Controls - iOS 18 Style
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Flash Button
-                  GestureDetector(
+                  // Flash Button - iOS 18 Style
+                  iOS18CircularButton(
+                    icon: _isFlashOn ? Icons.flash_on : Icons.flash_off,
                     onTap: _toggleFlash,
-                    child: Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.3),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.2),
-                          width: 1,
-                        ),
-                      ),
-                      child: Icon(
-                        _isFlashOn ? Icons.flash_on : Icons.flash_off,
-                        color: _isFlashOn ? Colors.yellow : Colors.white,
-                        size: 20,
-                      ),
-                    ),
+                    isActive: _isFlashOn,
+                    size: 44,
                   ),
 
-                  // Zoom Level Indicator
+                  // Zoom Level Indicator - iOS 18 Style  
                   if (_isCameraInitialized)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.2),
-                          width: 1,
-                        ),
-                      ),
+                    iOS18GlassEffect(
+                      borderRadius: BorderRadius.circular(20),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      blur: 15.0,
+                      opacity: 0.4,
                       child: Text(
                         '${_zoomLevel.toStringAsFixed(1)}x',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
                         ),
                       ),
                     ),
 
-                  // Settings Button
-                  GestureDetector(
+                  // Settings Button - iOS 18 Style
+                  iOS18CircularButton(
+                    icon: Icons.settings,
                     onTap: () {
                       // TODO: Open settings
                     },
-                    child: Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.3),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.2),
-                          width: 1,
-                        ),
-                      ),
-                      child: const Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
+                    size: 44,
                   ),
                 ],
               ),
@@ -385,10 +350,16 @@ class _CameraScreenState extends State<CameraScreen>
     );
   }
 
-  /// Build organized bottom controls panel with scientific hierarchy
+  /// Build organized bottom controls panel with iOS 18 glass morphism styling
   Widget _buildBottomControlsPanel() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    return iOS18GlassEffect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(30),
+        topRight: Radius.circular(30),
+      ),
+      padding: const EdgeInsets.all(20),
+      blur: 25.0,
+      opacity: 0.35,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -425,6 +396,9 @@ class _CameraScreenState extends State<CameraScreen>
               onZoomChanged: _onZoomChanged,
               onCapturePressed: _captureEnhancedPhoto,
             ),
+          
+          // Additional bottom spacing for iOS 18 look
+          const SizedBox(height: 8),
         ],
       ),
     );

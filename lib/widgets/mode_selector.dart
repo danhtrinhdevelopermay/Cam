@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'blur_overlay.dart';
 
 class ModeSelector extends StatelessWidget {
   final String currentMode;
@@ -24,55 +25,48 @@ class ModeSelector extends StatelessWidget {
     return Container(
       height: 32,
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: ClipRRect(
+      child: iOS18GlassEffect(
         borderRadius: BorderRadius.circular(20),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.1),
-                width: 1,
-              ),
-            ),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: modes.length,
-              itemBuilder: (context, index) {
-                final mode = modes[index];
-                final isSelected = currentMode.toUpperCase() == mode;
-                
-                return GestureDetector(
-                  onTap: () => onModeChanged(mode.toLowerCase()),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 6,
-                    ),
-                    child: Center(
-                      child: Text(
-                        mode,
-                        style: TextStyle(
-                          color: isSelected 
-                              ? Colors.yellow 
-                              : Colors.white.withOpacity(0.8),
-                          fontSize: 12,
-                          fontWeight: isSelected 
-                              ? FontWeight.w600 
-                              : FontWeight.w400,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
+        blur: 20.0,
+        opacity: 0.25,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: modes.length,
+          itemBuilder: (context, index) {
+            final mode = modes[index];
+            final isSelected = currentMode.toUpperCase() == mode;
+            
+            return GestureDetector(
+              onTap: () => onModeChanged(mode.toLowerCase()),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: isSelected ? Colors.yellow.withOpacity(0.2) : Colors.transparent,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Text(
+                    mode,
+                    style: TextStyle(
+                      color: isSelected 
+                          ? Colors.yellow 
+                          : Colors.white.withOpacity(0.9),
+                      fontSize: 12,
+                      fontWeight: isSelected 
+                          ? FontWeight.w700 
+                          : FontWeight.w500,
+                      letterSpacing: 0.5,
                     ),
                   ),
-                );
-              },
-            ),
-          ),
+                ),
+              ),
+            );
+          },
         ),
-      ),
     );
   }
 }

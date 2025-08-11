@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import '../camera/advanced_zoom_controller.dart';
+import 'blur_overlay.dart';
 
 /// Advanced zoom controls widget with 10x zoom capabilities
 /// Provides UI for optical zoom, digital zoom, and enhancement method selection
@@ -557,25 +558,20 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
     );
   }
 
-  /// Build compact zoom status for reorganized layout
+  /// Build compact zoom status for reorganized layout with iOS 18 styling
   Widget _buildCompactZoomStatus() {
-    return Container(
+    return iOS18GlassEffect(
+      borderRadius: BorderRadius.circular(12),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
-      ),
+      blur: 15.0,
+      opacity: 0.3,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             _getZoomMethodIcon(),
             size: 14,
-            color: Colors.white,
+            color: Colors.white.withOpacity(0.9),
           ),
           const SizedBox(width: 6),
           Flexible(
@@ -584,7 +580,8 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 11,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.2,
               ),
               overflow: TextOverflow.ellipsis,
             ),
@@ -596,10 +593,21 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                 _showEnhancementSettings = !_showEnhancementSettings;
               });
             },
-            child: Icon(
-              Icons.settings,
-              size: 14,
-              color: Colors.white.withOpacity(0.7),
+            child: Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: _showEnhancementSettings 
+                  ? Colors.yellow.withOpacity(0.2) 
+                  : Colors.transparent,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Icon(
+                Icons.settings,
+                size: 14,
+                color: _showEnhancementSettings 
+                  ? Colors.yellow 
+                  : Colors.white.withOpacity(0.8),
+              ),
             ),
           ),
         ],
@@ -620,16 +628,24 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
               widget.onZoomChanged(zoomLevel);
               setState(() {});
             },
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
               margin: const EdgeInsets.symmetric(horizontal: 2),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: isSelected ? Colors.yellow : Colors.black.withOpacity(0.3),
+                color: isSelected ? Colors.yellow.withOpacity(0.9) : Colors.black.withOpacity(0.4),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: isSelected ? Colors.yellow.withOpacity(0.5) : Colors.white.withOpacity(0.2),
-                  width: 1,
+                  color: isSelected ? Colors.yellow : Colors.white.withOpacity(0.3),
+                  width: isSelected ? 2 : 1,
                 ),
+                boxShadow: isSelected ? [
+                  BoxShadow(
+                    color: Colors.yellow.withOpacity(0.3),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ] : [],
               ),
               child: Text(
                 '${zoomLevel.toInt()}x',
@@ -652,15 +668,23 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
               _showZoomSlider = !_showZoomSlider;
             });
           },
-          child: Container(
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: _showZoomSlider ? Colors.yellow.withOpacity(0.2) : Colors.black.withOpacity(0.3),
+              color: _showZoomSlider ? Colors.yellow.withOpacity(0.9) : Colors.black.withOpacity(0.4),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: _showZoomSlider ? Colors.yellow.withOpacity(0.5) : Colors.white.withOpacity(0.2),
-                width: 1,
+                color: _showZoomSlider ? Colors.yellow : Colors.white.withOpacity(0.3),
+                width: _showZoomSlider ? 2 : 1,
               ),
+              boxShadow: _showZoomSlider ? [
+                BoxShadow(
+                  color: Colors.yellow.withOpacity(0.3),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+              ] : [],
             ),
             child: Icon(
               Icons.tune,
