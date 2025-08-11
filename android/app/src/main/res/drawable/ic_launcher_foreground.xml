@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108"
+    android:tint="#000000">
+    <!-- Camera icon for iOS18 Camera App -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M54,32c12.1,0 22,9.9 22,22s-9.9,22 -22,22s-22,-9.9 -22,-22S41.9,32 54,32M54,28c-14.4,0 -26,11.6 -26,26s11.6,26 26,26s26,-11.6 26,-26S68.4,28 54,28L54,28z"/>
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M54,40c7.7,0 14,6.3 14,14s-6.3,14 -14,14s-14,-6.3 -14,-14S46.3,40 54,40M54,36c-9.9,0 -18,8.1 -18,18s8.1,18 18,18s18,-8.1 18,-18S63.9,36 54,36L54,36z"/>
+    <!-- Camera body -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M90,26H78l-6,-8H36l-6,8H18c-4.4,0 -8,3.6 -8,8v44c0,4.4 3.6,8 8,8h72c4.4,0 8,-3.6 8,-8V34C98,29.6 94.4,26 90,26z M90,78H18V34h16l6,-8h20l6,8h24V78z"/>
+</vector>

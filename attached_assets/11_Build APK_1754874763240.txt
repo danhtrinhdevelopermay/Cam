@@ -1,0 +1,75 @@
+﻿2025-08-11T01:08:18.7730352Z ##[group]Run flutter build apk --release
+2025-08-11T01:08:18.7731008Z [36;1mflutter build apk --release[0m
+2025-08-11T01:08:18.7771517Z shell: /usr/bin/bash -e {0}
+2025-08-11T01:08:18.7771744Z env:
+2025-08-11T01:08:18.7772023Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T01:08:18.7772474Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T01:08:18.7772886Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T01:08:18.7773212Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T01:08:18.7773465Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T01:08:18.7773726Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T01:08:18.7774176Z ##[endgroup]
+2025-08-11T01:08:19.2733007Z 
+2025-08-11T01:09:53.2408395Z Running Gradle task 'assembleRelease'...                        
+2025-08-11T01:09:53.2413513Z Warning: The plugin camera_android requires Android SDK version 34 or higher.
+2025-08-11T01:09:53.2418662Z For more information about build configuration, see https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+2025-08-11T01:10:10.3279955Z Warning: The plugin flutter_plugin_android_lifecycle requires Android SDK version 34 or higher.
+2025-08-11T01:10:10.3291926Z For more information about build configuration, see https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+2025-08-11T01:10:19.2242862Z Warning: The plugin path_provider_android requires Android SDK version 34 or higher.
+2025-08-11T01:10:19.2252566Z For more information about build configuration, see https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+2025-08-11T01:10:29.1247136Z Warning: The plugin permission_handler_android requires Android SDK version 34 or higher.
+2025-08-11T01:10:29.1314608Z For more information about build configuration, see https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+2025-08-11T01:10:29.1324803Z One or more plugins require a higher Android SDK version.
+2025-08-11T01:10:29.1329542Z Fix this issue by adding the following to /home/runner/work/Cam/Cam/android/app/build.gradle:
+2025-08-11T01:10:29.1334066Z android {
+2025-08-11T01:10:29.1338071Z   compileSdkVersion 34
+2025-08-11T01:10:29.1340833Z   ...
+2025-08-11T01:10:29.1343129Z }
+2025-08-11T01:10:29.1345139Z 
+2025-08-11T01:10:33.8241369Z Checking the license for package Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/licenses
+2025-08-11T01:10:33.8246896Z License for package Android SDK Build-Tools 30.0.3 accepted.
+2025-08-11T01:10:33.8248044Z Preparing "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)".
+2025-08-11T01:10:35.1302317Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" ready.
+2025-08-11T01:10:35.1303561Z Installing Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/build-tools/30.0.3
+2025-08-11T01:10:35.1304914Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" complete.
+2025-08-11T01:10:35.2243092Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" finished.
+2025-08-11T01:10:35.2247775Z Checking the license for package Android SDK Platform 33 in /usr/local/lib/android/sdk/licenses
+2025-08-11T01:10:35.2255754Z License for package Android SDK Platform 33 accepted.
+2025-08-11T01:10:35.2256509Z Preparing "Install Android SDK Platform 33 (revision: 3)".
+2025-08-11T01:10:38.1240405Z "Install Android SDK Platform 33 (revision: 3)" ready.
+2025-08-11T01:10:38.1253198Z Installing Android SDK Platform 33 in /usr/local/lib/android/sdk/platforms/android-33
+2025-08-11T01:10:38.1255903Z "Install Android SDK Platform 33 (revision: 3)" complete.
+2025-08-11T01:10:38.1257809Z "Install Android SDK Platform 33 (revision: 3)" finished.
+2025-08-11T01:10:38.4241583Z Checking the license for package Android SDK Platform 30 in /usr/local/lib/android/sdk/licenses
+2025-08-11T01:10:38.4244812Z License for package Android SDK Platform 30 accepted.
+2025-08-11T01:10:38.4246321Z Preparing "Install Android SDK Platform 30 (revision: 3)".
+2025-08-11T01:10:40.9241868Z "Install Android SDK Platform 30 (revision: 3)" ready.
+2025-08-11T01:10:40.9248508Z Installing Android SDK Platform 30 in /usr/local/lib/android/sdk/platforms/android-30
+2025-08-11T01:10:40.9249499Z "Install Android SDK Platform 30 (revision: 3)" complete.
+2025-08-11T01:10:40.9250262Z "Install Android SDK Platform 30 (revision: 3)" finished.
+2025-08-11T01:11:26.3253833Z Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 1940 bytes (99.9% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+2025-08-11T01:11:38.4261384Z 
+2025-08-11T01:11:38.4262211Z FAILURE: Build failed with an exception.
+2025-08-11T01:11:38.4263089Z 
+2025-08-11T01:11:38.4281478Z * What went wrong:
+2025-08-11T01:11:38.4282113Z Execution failed for task ':app:processReleaseResources'.
+2025-08-11T01:11:38.4283965Z > A failure occurred while executing com.android.build.gradle.internal.res.LinkApplicationAndroidResourcesTask$TaskAction
+2025-08-11T01:11:38.4285376Z    > Android resource linking failed
+2025-08-11T01:11:38.4287548Z      /home/runner/work/Cam/Cam/build/app/intermediates/packaged_manifests/release/AndroidManifest.xml:22: error: resource mipmap/ic_launcher (aka com.example.ios18_camera_app:mipmap/ic_launcher) not found.
+2025-08-11T01:11:38.4292056Z      /home/runner/work/Cam/Cam/build/app/intermediates/packaged_manifests/release/AndroidManifest.xml:27: error: 'portrait' is incompatible with attribute orientation (attr) enum [horizontal=0, vertical=1].
+2025-08-11T01:11:38.4295002Z      /home/runner/work/Cam/Cam/build/app/intermediates/packaged_manifests/release/AndroidManifest.xml:27: error: resource style/LaunchTheme (aka com.example.ios18_camera_app:style/LaunchTheme) not found.
+2025-08-11T01:11:38.4297905Z      /home/runner/work/Cam/Cam/build/app/intermediates/packaged_manifests/release/AndroidManifest.xml:35: error: resource style/NormalTheme (aka com.example.ios18_camera_app:style/NormalTheme) not found.
+2025-08-11T01:11:38.4299655Z      error: failed processing manifest.
+2025-08-11T01:11:38.4299964Z 
+2025-08-11T01:11:38.4299978Z 
+2025-08-11T01:11:38.4300104Z * Try:
+2025-08-11T01:11:38.4300563Z > Run with --stacktrace option to get the stack trace.
+2025-08-11T01:11:38.4301410Z > Run with --info or --debug option to get more log output.
+2025-08-11T01:11:38.4302033Z > Run with --scan to get full insights.
+2025-08-11T01:11:38.4302316Z 
+2025-08-11T01:11:38.4302580Z * Get more help at https://help.gradle.org
+2025-08-11T01:11:38.4302906Z 
+2025-08-11T01:11:38.4303082Z BUILD FAILED in 3m 18s
+2025-08-11T01:11:38.8411662Z Running Gradle task 'assembleRelease'...                          199.5s
+2025-08-11T01:11:38.8461355Z Gradle task assembleRelease failed with exit code 1
+2025-08-11T01:11:38.8542547Z ##[error]Process completed with exit code 1.
