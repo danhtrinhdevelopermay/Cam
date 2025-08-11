@@ -5,13 +5,13 @@ import 'package:image/image.dart' as img;
 import '../ai/super_resolution_service.dart';
 
 /// Advanced zoom controller that implements multiple zoom enhancement methods
-/// Supports optical zoom, high-resolution crop, AI super resolution, and multi-frame stacking
+/// Supports optical zoom, high-resolution crop, and AI super resolution
 class AdvancedZoomController {
   // Zoom method preferences - can be configured by user
   bool opticalZoomEnabled = true;
   bool highResolutionCropEnabled = true;
   bool aiSuperResolutionEnabled = false; // Disabled by default due to performance
-  bool multiFrameStackingEnabled = true;
+
   
   // Device capabilities
   bool hasTelephotos = false;
@@ -26,9 +26,7 @@ class AdvancedZoomController {
   double maxDigitalZoom = 10.0;
   double maxSensorResolutionMP = 12.0; // Will be detected dynamically
   
-  // Multi-frame stacking state
-  List<Uint8List> capturedFrames = [];
-  bool isCapturingMultiFrame = false;
+
   
   /// Initialize the advanced zoom controller
   /// Detects available cameras and their capabilities
@@ -266,99 +264,9 @@ class AdvancedZoomController {
     }
   }
   
-  /// Start multi-frame capture for stacking
-  /// Method 4: Multi-frame image stacking
-  Future<void> startMultiFrameCapture() async {
-    if (!multiFrameStackingEnabled || _cameraController == null) return;
-    
-    isCapturingMultiFrame = true;
-    capturedFrames.clear();
-    
-    try {
-      if (kDebugMode) {
-        print('📸 Starting multi-frame capture...');
-      }
-      
-      // Capture 3-5 frames rapidly
-      for (int i = 0; i < 3; i++) {
-        final XFile imageFile = await _cameraController!.takePicture();
-        final Uint8List imageBytes = await imageFile.readAsBytes();
-        capturedFrames.add(imageBytes);
-        
-        // Small delay between captures
-        await Future.delayed(const Duration(milliseconds: 100));
-      }
-      
-      if (kDebugMode) {
-        print('✅ Multi-frame capture completed: ${capturedFrames.length} frames');
-      }
-      
-    } catch (e) {
-      if (kDebugMode) {
-        print('❌ Multi-frame capture failed: $e');
-      }
-    }
-    
-    isCapturingMultiFrame = false;
-  }
+
   
-  /// Stack multiple frames to reduce noise and increase detail
-  Future<Uint8List?> stackMultiFrameImages() async {
-    if (capturedFrames.isEmpty || capturedFrames.length < 2) return null;
-    
-    try {
-      if (kDebugMode) {
-        print('🔄 Processing multi-frame stack...');
-      }
-      
-      // Decode all images
-      List<img.Image> images = [];
-      for (var frameBytes in capturedFrames) {
-        img.Image? image = img.decodeImage(frameBytes);
-        if (image != null) images.add(image);
-      }
-      
-      if (images.isEmpty) return null;
-      
-      // Create base image from first frame
-      img.Image resultImage = img.Image.from(images[0]);
-      
-      // Simple averaging algorithm for noise reduction
-      // In production, you'd use more sophisticated alignment and stacking
-      for (int y = 0; y < resultImage.height; y++) {
-        for (int x = 0; x < resultImage.width; x++) {
-          int totalR = 0, totalG = 0, totalB = 0;
-          
-          for (var image in images) {
-            if (x < image.width && y < image.height) {
-              img.Pixel pixel = image.getPixel(x, y);
-              totalR += pixel.r.toInt();
-              totalG += pixel.g.toInt();
-              totalB += pixel.b.toInt();
-            }
-          }
-          
-          int avgR = totalR ~/ images.length;
-          int avgG = totalG ~/ images.length;
-          int avgB = totalB ~/ images.length;
-          
-          resultImage.setPixelRgb(x, y, avgR, avgG, avgB);
-        }
-      }
-      
-      if (kDebugMode) {
-        print('✅ Multi-frame stacking completed');
-      }
-      
-      return Uint8List.fromList(img.encodeJpg(resultImage, quality: 95));
-      
-    } catch (e) {
-      if (kDebugMode) {
-        print('❌ Multi-frame stacking failed: $e');
-      }
-      return null;
-    }
-  }
+
   
 
   
@@ -370,13 +278,7 @@ class AdvancedZoomController {
     try {
       Uint8List? finalImage;
       
-      // Method 4: Multi-frame stacking for high zoom levels (>5x)
-      if (multiFrameStackingEnabled && currentZoomLevel > 5.0) {
-        await startMultiFrameCapture();
-        finalImage = await stackMultiFrameImages();
-      }
-      
-      // Method 2: High-resolution crop (if multi-frame not used)
+      // Method 2: High-resolution crop
       if (finalImage == null && highResolutionCropEnabled) {
         finalImage = await captureHighResolutionZoomedImage(currentZoomLevel);
       }
@@ -415,8 +317,6 @@ class AdvancedZoomController {
       return 'Optical Zoom (${currentZoomLevel.toStringAsFixed(1)}x)';
     } else if (currentZoomLevel > maxOpticalZoom && opticalZoomEnabled) {
       return 'Hybrid Zoom (${maxOpticalZoom}x optical + digital)';
-    } else if (currentZoomLevel > 5.0 && multiFrameStackingEnabled) {
-      return 'Multi-frame Enhanced (${currentZoomLevel.toStringAsFixed(1)}x)';
     } else if (highResolutionCropEnabled) {
       return 'High-res Crop (${currentZoomLevel.toStringAsFixed(1)}x)';
     } else {
@@ -437,14 +337,13 @@ class AdvancedZoomController {
         'optical': opticalZoomEnabled,
         'highResCrop': highResolutionCropEnabled,
         'aiSuperRes': aiSuperResolutionEnabled,
-        'multiFrame': multiFrameStackingEnabled,
+
       }
     };
   }
   
   /// Cleanup resources
   void dispose() {
-    capturedFrames.clear();
     _cameraController = null;
   }
 }

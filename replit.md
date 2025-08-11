@@ -20,13 +20,13 @@ Preferred communication style: Simple, everyday language.
 - Updated to SDK 34 for camera plugin compatibility
 
 ### Advanced 10x Zoom Feature (August 11, 2025):
-- Implemented comprehensive 10x zoom system with four enhancement methods
+- Implemented comprehensive 10x zoom system with three enhancement methods
 - Added optical zoom detection for telephoto and periscope cameras
 - Integrated high-resolution capture and crop functionality
 - Added AI super resolution service with Real-ESRGAN and Waifu2x support
-- Implemented multi-frame image stacking for noise reduction
 - Created advanced zoom controls with iOS 18-style interface
 - Added zoom settings panel for method configuration
+- Removed multi-frame stacking feature per user request (August 11, 2025)
 
 ## System Architecture
 
@@ -41,7 +41,7 @@ Preferred communication style: Simple, everyday language.
   - `lib/widgets/advanced_zoom_controls.dart` - Advanced 10x zoom interface with method indicators
   - `lib/widgets/zoom_settings_panel.dart` - Configuration panel for zoom enhancement methods
 - **Advanced Zoom System**:
-  - `lib/camera/advanced_zoom_controller.dart` - Core zoom orchestration and enhancement methods
+  - `lib/camera/advanced_zoom_controller.dart` - Core zoom orchestration with optical zoom, high-res crop, and AI enhancement
   - `lib/ai/super_resolution_service.dart` - AI enhancement with Real-ESRGAN and Waifu2x integration
 
 ### Android Configuration

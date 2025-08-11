@@ -139,9 +139,6 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
     if (controller.currentZoomLevel <= controller.maxOpticalZoom && 
         controller.opticalZoomEnabled) {
       return Icons.camera_alt; // Optical zoom
-    } else if (controller.multiFrameStackingEnabled && 
-               controller.currentZoomLevel > 5.0) {
-      return Icons.burst_mode; // Multi-frame
     } else if (controller.highResolutionCropEnabled) {
       return Icons.crop; // High-res crop
     } else if (controller.aiSuperResolutionEnabled) {
@@ -362,14 +359,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                   true,
                 ),
                 
-                _buildEnhancementToggle(
-                  'Multi-Frame Stacking',
-                  'Reduces noise at high zoom levels',
-                  controller.multiFrameStackingEnabled,
-                  (value) => setState(() => controller.multiFrameStackingEnabled = value),
-                  true,
-                ),
-                
+
                 _buildEnhancementToggle(
                   'AI Super Resolution',
                   'Requires internet connection',

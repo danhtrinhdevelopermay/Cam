@@ -228,15 +228,7 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
           true,
         ),
         
-        _buildMethodToggle(
-          'Multi-Frame Stacking',
-          'Capture and merge multiple frames for better quality',
-          Icons.burst_mode,
-          widget.zoomController.multiFrameStackingEnabled,
-          (value) => setState(() => widget.zoomController.multiFrameStackingEnabled = value),
-          true,
-        ),
-        
+
         _buildMethodToggle(
           'AI Super Resolution',
           'AI-powered image enhancement (requires internet)',
@@ -392,7 +384,6 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
               const SizedBox(height: 8),
               Text(
                 '• Hold device steady during high zoom capture\n'
-                '• Use good lighting for multi-frame stacking\n'
                 '• AI enhancement works best with internet connection\n'
                 '• Higher zoom levels take longer to process',
                 style: TextStyle(
