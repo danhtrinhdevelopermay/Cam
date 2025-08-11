@@ -258,10 +258,10 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.3),
+              color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: Colors.white.withValues(alpha: 0.2),
+                color: Colors.white.withOpacity(0.2),
                 width: 1,
               ),
             ),
@@ -282,7 +282,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                         max: widget.zoomController.maxDigitalZoom,
                         divisions: 90, // 0.1x precision
                         activeColor: Colors.yellow,
-                        inactiveColor: Colors.white.withValues(alpha: 0.3),
+                        inactiveColor: Colors.white.withOpacity(0.3),
                         thumbColor: Colors.yellow,
                         onChanged: (value) {
                           widget.onZoomChanged(value);
@@ -327,10 +327,10 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.4),
+              color: Colors.black.withOpacity(0.4),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: Colors.white.withValues(alpha: 0.2),
+                color: Colors.white.withOpacity(0.2),
                 width: 1,
               ),
             ),
@@ -416,7 +416,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                         margin: const EdgeInsets.only(left: 6),
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: Colors.green.withValues(alpha: 0.2),
+                          color: Colors.green.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: const Text(
@@ -433,7 +433,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                 Text(
                   subtitle,
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.7),
+                    color: Colors.white.withOpacity(0.7),
                     fontSize: 10,
                   ),
                 ),
@@ -444,8 +444,8 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
             value: value,
             onChanged: onChanged,
             activeColor: Colors.yellow,
-            inactiveThumbColor: Colors.white.withValues(alpha: 0.7),
-            inactiveTrackColor: Colors.white.withValues(alpha: 0.2),
+            inactiveThumbColor: Colors.white.withOpacity(0.7),
+            inactiveTrackColor: Colors.white.withOpacity(0.2),
           ),
         ],
       ),
@@ -458,10 +458,10 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.orange.withValues(alpha: 0.2),
+        color: Colors.orange.withOpacity(0.2),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Colors.orange.withValues(alpha: 0.4),
+          color: Colors.orange.withOpacity(0.4),
           width: 1,
         ),
       ),
@@ -512,7 +512,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.yellow.withValues(alpha: 0.3),
+                    color: Colors.yellow.withOpacity(0.3),
                     blurRadius: 15,
                     spreadRadius: 2,
                   ),
@@ -542,7 +542,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                       decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.7),
+                        color: Colors.black.withOpacity(0.7),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(

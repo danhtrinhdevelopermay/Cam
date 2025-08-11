@@ -1,0 +1,51 @@
+﻿2025-08-11T02:04:20.0854300Z ##[group]Run flutter analyze --no-fatal-infos || echo "Analysis completed with warnings"
+2025-08-11T02:04:20.0854873Z [36;1mflutter analyze --no-fatal-infos || echo "Analysis completed with warnings"[0m
+2025-08-11T02:04:20.0895067Z shell: /usr/bin/bash -e {0}
+2025-08-11T02:04:20.0895297Z env:
+2025-08-11T02:04:20.0895571Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T02:04:20.0896028Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T02:04:20.0896442Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T02:04:20.0896766Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T02:04:20.0897030Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T02:04:20.0897297Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T02:04:20.0897543Z ##[endgroup]
+2025-08-11T02:04:30.3426603Z Analyzing Cam...                                                
+2025-08-11T02:04:30.3433095Z 
+2025-08-11T02:04:30.3474841Z    info • The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/foundation.dart' • lib/ai/super_resolution_service.dart:1:8 • unnecessary_import
+2025-08-11T02:04:30.3476887Z    info • The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/foundation.dart' • lib/camera/advanced_zoom_controller.dart:1:8 • unnecessary_import
+2025-08-11T02:04:30.3490669Z warning • The operand can't be null, so the condition is always 'true' • lib/camera/advanced_zoom_controller.dart:391:22 • unnecessary_null_comparison
+2025-08-11T02:04:30.3492580Z    info • The declaration '_switchCamera' isn't referenced • lib/screens/camera_screen.dart:175:16 • unused_element
+2025-08-11T02:04:30.3494283Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:261:35 • undefined_method
+2025-08-11T02:04:30.3496082Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:264:37 • undefined_method
+2025-08-11T02:04:30.3497882Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:285:53 • undefined_method
+2025-08-11T02:04:30.3499803Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:330:35 • undefined_method
+2025-08-11T02:04:30.3501613Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:333:37 • undefined_method
+2025-08-11T02:04:30.3503683Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/advanced_zoom_controls.dart:419:47 • undefined_method
+2025-08-11T02:04:30.3506063Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:436:41 • undefined_method
+2025-08-11T02:04:30.3507943Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:447:46 • undefined_method
+2025-08-11T02:04:30.3510571Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:448:46 • undefined_method
+2025-08-11T02:04:30.3512456Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/advanced_zoom_controls.dart:461:30 • undefined_method
+2025-08-11T02:04:30.3513577Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/advanced_zoom_controls.dart:464:32 • undefined_method
+2025-08-11T02:04:30.3514661Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/advanced_zoom_controls.dart:515:42 • undefined_method
+2025-08-11T02:04:30.3515731Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/advanced_zoom_controls.dart:545:45 • undefined_method
+2025-08-11T02:04:30.3516691Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:34:35 • undefined_method
+2025-08-11T02:04:30.3517901Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:65:49 • undefined_method
+2025-08-11T02:04:30.3518846Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:128:33 • undefined_method
+2025-08-11T02:04:30.3520681Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:131:35 • undefined_method
+2025-08-11T02:04:30.3522120Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:190:35 • undefined_method
+2025-08-11T02:04:30.3523081Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:264:29 • undefined_method
+2025-08-11T02:04:30.3524054Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/zoom_settings_panel.dart:268:29 • undefined_method
+2025-08-11T02:04:30.3525031Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:269:28 • undefined_method
+2025-08-11T02:04:30.3526034Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/zoom_settings_panel.dart:280:33 • undefined_method
+2025-08-11T02:04:30.3527003Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:281:32 • undefined_method
+2025-08-11T02:04:30.3527936Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:286:59 • undefined_method
+2025-08-11T02:04:30.3528914Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/zoom_settings_panel.dart:310:47 • undefined_method
+2025-08-11T02:04:30.3530162Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:328:41 • undefined_method
+2025-08-11T02:04:30.3531133Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:339:46 • undefined_method
+2025-08-11T02:04:30.3532067Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:340:46 • undefined_method
+2025-08-11T02:04:30.3533036Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/zoom_settings_panel.dart:364:32 • undefined_method
+2025-08-11T02:04:30.3534039Z   error • The method 'withValues' isn't defined for the type 'MaterialColor' • lib/widgets/zoom_settings_panel.dart:367:34 • undefined_method
+2025-08-11T02:04:30.3535196Z   error • The method 'withValues' isn't defined for the type 'Color' • lib/widgets/zoom_settings_panel.dart:399:39 • undefined_method
+2025-08-11T02:04:30.3535617Z 
+2025-08-11T02:04:30.3675127Z 35 issues found. (ran in 9.5s)
+2025-08-11T02:04:30.3745347Z Analysis completed with warnings

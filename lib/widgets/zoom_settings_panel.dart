@@ -31,7 +31,7 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
           filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.8),
+              color: Colors.black.withOpacity(0.8),
               borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
             ),
             child: Column(
@@ -62,7 +62,7 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
                           width: 32,
                           height: 32,
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.1),
+                            color: Colors.white.withOpacity(0.1),
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
@@ -125,10 +125,10 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.1),
+            color: Colors.white.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.2),
+              color: Colors.white.withOpacity(0.2),
               width: 1,
             ),
           ),
@@ -187,7 +187,7 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
           Text(
             value,
             style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.8),
+              color: Colors.white.withOpacity(0.8),
               fontSize: 12,
             ),
           ),
@@ -261,12 +261,12 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.05),
+        color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: value 
-            ? Colors.yellow.withValues(alpha: 0.3)
-            : Colors.white.withValues(alpha: 0.1),
+            ? Colors.yellow.withOpacity(0.3)
+            : Colors.white.withOpacity(0.1),
           width: 1,
         ),
       ),
@@ -277,13 +277,13 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
             height: 40,
             decoration: BoxDecoration(
               color: value 
-                ? Colors.yellow.withValues(alpha: 0.2)
-                : Colors.white.withValues(alpha: 0.1),
+                ? Colors.yellow.withOpacity(0.2)
+                : Colors.white.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(
               icon,
-              color: value ? Colors.yellow : Colors.white.withValues(alpha: 0.7),
+              color: value ? Colors.yellow : Colors.white.withOpacity(0.7),
               size: 20,
             ),
           ),
@@ -307,7 +307,7 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
                         margin: const EdgeInsets.only(left: 8),
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: Colors.green.withValues(alpha: 0.2),
+                          color: Colors.green.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: const Text(
@@ -325,7 +325,7 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
                 Text(
                   description,
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.7),
+                    color: Colors.white.withOpacity(0.7),
                     fontSize: 12,
                   ),
                 ),
@@ -336,8 +336,8 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
             value: value,
             onChanged: onChanged,
             activeColor: Colors.yellow,
-            inactiveThumbColor: Colors.white.withValues(alpha: 0.7),
-            inactiveTrackColor: Colors.white.withValues(alpha: 0.2),
+            inactiveThumbColor: Colors.white.withOpacity(0.7),
+            inactiveTrackColor: Colors.white.withOpacity(0.2),
           ),
         ],
       ),
@@ -361,10 +361,10 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.blue.withValues(alpha: 0.1),
+            color: Colors.blue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: Colors.blue.withValues(alpha: 0.3),
+              color: Colors.blue.withOpacity(0.3),
               width: 1,
             ),
           ),
@@ -396,7 +396,7 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
                 '• AI enhancement works best with internet connection\n'
                 '• Higher zoom levels take longer to process',
                 style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.8),
+                  color: Colors.white.withOpacity(0.8),
                   fontSize: 12,
                   height: 1.4,
                 ),
