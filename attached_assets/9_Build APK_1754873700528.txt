@@ -1,0 +1,16 @@
+﻿2025-08-11T00:54:22.7717660Z ##[group]Run flutter build apk --release
+2025-08-11T00:54:22.7718164Z [36;1mflutter build apk --release[0m
+2025-08-11T00:54:22.7770610Z shell: /usr/bin/bash -e {0}
+2025-08-11T00:54:22.7770966Z env:
+2025-08-11T00:54:22.7771418Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T00:54:22.7772207Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T00:54:22.7772940Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T00:54:22.7773609Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T00:54:22.7773996Z ##[endgroup]
+2025-08-11T00:54:23.2832679Z 
+2025-08-11T00:54:23.3746124Z Running Gradle task 'assembleRelease'...                        
+2025-08-11T00:54:23.3754746Z Error: Could not find or load main class org.gradle.wrapper.GradleWrapperMain
+2025-08-11T00:54:23.3758223Z Caused by: java.lang.ClassNotFoundException: org.gradle.wrapper.GradleWrapperMain
+2025-08-11T00:54:23.3879182Z Running Gradle task 'assembleRelease'...                            70ms
+2025-08-11T00:54:23.3919275Z Gradle task assembleRelease failed with exit code 1
+2025-08-11T00:54:23.3996564Z ##[error]Process completed with exit code 1.
