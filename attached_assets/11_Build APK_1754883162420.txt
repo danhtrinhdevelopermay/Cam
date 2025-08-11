@@ -1,0 +1,56 @@
+﻿2025-08-11T03:29:16.6193224Z ##[group]Run flutter build apk --release
+2025-08-11T03:29:16.6193626Z [36;1mflutter build apk --release[0m
+2025-08-11T03:29:16.6234165Z shell: /usr/bin/bash -e {0}
+2025-08-11T03:29:16.6234429Z env:
+2025-08-11T03:29:16.6234736Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T03:29:16.6235219Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T03:29:16.6235682Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T03:29:16.6236022Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T03:29:16.6236298Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T03:29:16.6236595Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T03:29:16.6236860Z ##[endgroup]
+2025-08-11T03:29:17.1404239Z 
+2025-08-11T03:30:58.6915148Z Running Gradle task 'assembleRelease'...                        
+2025-08-11T03:30:58.6930933Z Checking the license for package Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/licenses
+2025-08-11T03:30:58.6938928Z License for package Android SDK Build-Tools 30.0.3 accepted.
+2025-08-11T03:30:58.6940163Z Preparing "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)".
+2025-08-11T03:30:59.7789310Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" ready.
+2025-08-11T03:30:59.7790901Z Installing Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/build-tools/30.0.3
+2025-08-11T03:30:59.7792922Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" complete.
+2025-08-11T03:30:59.8801016Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" finished.
+2025-08-11T03:31:00.0795075Z Checking the license for package Android SDK Platform 30 in /usr/local/lib/android/sdk/licenses
+2025-08-11T03:31:00.0799360Z License for package Android SDK Platform 30 accepted.
+2025-08-11T03:31:00.0801187Z Preparing "Install Android SDK Platform 30 (revision: 3)".
+2025-08-11T03:31:02.4829103Z "Install Android SDK Platform 30 (revision: 3)" ready.
+2025-08-11T03:31:02.4830921Z Installing Android SDK Platform 30 in /usr/local/lib/android/sdk/platforms/android-30
+2025-08-11T03:31:02.4837559Z "Install Android SDK Platform 30 (revision: 3)" complete.
+2025-08-11T03:31:02.4838403Z "Install Android SDK Platform 30 (revision: 3)" finished.
+2025-08-11T03:31:36.8814854Z lib/screens/camera_screen.dart:142:33: Error: This expression has type 'void' and can't be used.
+2025-08-11T03:31:36.8819079Z         _advancedZoomController.setCameraController(_cameraController!),
+2025-08-11T03:31:36.8823811Z                                 ^
+2025-08-11T03:31:36.8825616Z lib/screens/camera_screen.dart:141:25: Error: The argument type 'List<void>' can't be assigned to the parameter type 'Iterable<Future<dynamic>>'.
+2025-08-11T03:31:36.8831393Z  - 'List' is from 'dart:core'.
+2025-08-11T03:31:36.8832505Z  - 'Iterable' is from 'dart:core'.
+2025-08-11T03:31:36.8833486Z  - 'Future' is from 'dart:async'.
+2025-08-11T03:31:36.8839955Z       await Future.wait([
+2025-08-11T03:31:36.8842228Z                         ^
+2025-08-11T03:31:42.8819795Z Target kernel_snapshot failed: Exception
+2025-08-11T03:31:42.8820827Z 
+2025-08-11T03:31:42.8822243Z 
+2025-08-11T03:31:42.8822605Z FAILURE: Build failed with an exception.
+2025-08-11T03:31:42.8822949Z 
+2025-08-11T03:31:42.8823144Z * What went wrong:
+2025-08-11T03:31:42.8823783Z Execution failed for task ':app:compileFlutterBuildRelease'.
+2025-08-11T03:31:42.8825066Z > Process 'command '/opt/hostedtoolcache/flutter/stable-3.19.6-x64/bin/flutter'' finished with non-zero exit value 1
+2025-08-11T03:31:42.8825846Z 
+2025-08-11T03:31:42.8825978Z * Try:
+2025-08-11T03:31:42.8826511Z > Run with --stacktrace option to get the stack trace.
+2025-08-11T03:31:42.8827279Z > Run with --info or --debug option to get more log output.
+2025-08-11T03:31:42.8827918Z > Run with --scan to get full insights.
+2025-08-11T03:31:42.8828226Z 
+2025-08-11T03:31:42.8828525Z * Get more help at https://help.gradle.org
+2025-08-11T03:31:42.8828856Z 
+2025-08-11T03:31:42.8829062Z BUILD FAILED in 2m 25s
+2025-08-11T03:31:43.2955871Z Running Gradle task 'assembleRelease'...                          146.1s
+2025-08-11T03:31:43.2998849Z Gradle task assembleRelease failed with exit code 1
+2025-08-11T03:31:43.3056224Z ##[error]Process completed with exit code 1.

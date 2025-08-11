@@ -1,0 +1,38 @@
+﻿2025-08-11T03:29:04.5350775Z ##[group]Run flutter analyze --no-fatal-infos || echo "Analysis completed with warnings"
+2025-08-11T03:29:04.5351462Z [36;1mflutter analyze --no-fatal-infos || echo "Analysis completed with warnings"[0m
+2025-08-11T03:29:04.5391861Z shell: /usr/bin/bash -e {0}
+2025-08-11T03:29:04.5392120Z env:
+2025-08-11T03:29:04.5392435Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T03:29:04.5392911Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T03:29:04.5393375Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T03:29:04.5393726Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T03:29:04.5394031Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T03:29:04.5394324Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T03:29:04.5394591Z ##[endgroup]
+2025-08-11T03:29:15.2138466Z Analyzing Cam...                                                
+2025-08-11T03:29:15.2144489Z 
+2025-08-11T03:29:15.2188294Z warning • The operand can't be null, so the condition is always 'true' • lib/camera/advanced_zoom_controller.dart:282:11 • unnecessary_null_comparison
+2025-08-11T03:29:15.2191653Z warning • The operand can't be null, so the condition is always 'true' • lib/camera/advanced_zoom_controller.dart:293:22 • unnecessary_null_comparison
+2025-08-11T03:29:15.2194167Z warning • The value of the field '_blurAnimation' isn't used • lib/screens/camera_screen.dart:53:26 • unused_field
+2025-08-11T03:29:15.2195561Z   error • Couldn't infer type parameter 'E'.
+2025-08-11T03:29:15.2196190Z 
+2025-08-11T03:29:15.2196728Z Tried to infer 'void' for 'E' which doesn't work:
+2025-08-11T03:29:15.2197575Z   Return type declared as 'List<E>'
+2025-08-11T03:29:15.2198480Z               used where  'Iterable<Future<_>>' is required.
+2025-08-11T03:29:15.2204799Z The type 'void' was inferred from:
+2025-08-11T03:29:15.2205435Z   Parameter 'element' declared as     'E'
+2025-08-11T03:29:15.2206061Z                       but argument is 'void'.
+2025-08-11T03:29:15.2206741Z   Parameter 'element' declared as     'E'
+2025-08-11T03:29:15.2207399Z                       but argument is 'Future<void>'.
+2025-08-11T03:29:15.2207763Z 
+2025-08-11T03:29:15.2208179Z Consider passing explicit type argument(s) to the generic.
+2025-08-11T03:29:15.2208663Z 
+2025-08-11T03:29:15.2209241Z  • lib/screens/camera_screen.dart:141:25 • could_not_infer
+2025-08-11T03:29:15.2211373Z   error • The argument type 'List<void>' can't be assigned to the parameter type 'Iterable<Future<dynamic>>'.  • lib/screens/camera_screen.dart:141:25 • argument_type_not_assignable
+2025-08-11T03:29:15.2213584Z    info • The declaration '_buildMainZoomControls' isn't referenced • lib/widgets/advanced_zoom_controls.dart:109:10 • unused_element
+2025-08-11T03:29:15.2216250Z    info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/widgets/aspect_ratio_selector.dart:2:8 • unnecessary_import
+2025-08-11T03:29:15.2218770Z   error • The named parameter 'cameraInitFuture' is required, but there's no corresponding argument • test/widget_test.dart:11:35 • missing_required_argument
+2025-08-11T03:29:15.2221326Z   error • The named parameter 'cameraInitFuture' is required, but there's no corresponding argument • test/widget_test.dart:21:35 • missing_required_argument
+2025-08-11T03:29:15.2222741Z 
+2025-08-11T03:29:15.2338206Z 9 issues found. (ran in 9.9s)
+2025-08-11T03:29:15.2396957Z Analysis completed with warnings

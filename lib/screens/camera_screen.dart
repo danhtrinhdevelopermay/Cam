@@ -49,8 +49,6 @@ class _CameraScreenState extends State<CameraScreen>
   bool _showColorSettings = false;
   
   late AnimationController _animationController;
-  late AnimationController _blurController;
-  late Animation<double> _blurAnimation;
 
   @override
   void initState() {
@@ -80,19 +78,6 @@ class _CameraScreenState extends State<CameraScreen>
       duration: const Duration(milliseconds: 200),
       vsync: this,
     );
-    
-    _blurController = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    
-    _blurAnimation = Tween<double>(
-      begin: 0.0,
-      end: 10.0,
-    ).animate(CurvedAnimation(
-      parent: _blurController,
-      curve: Curves.easeOut,
-    ));
   }
 
   Future<void> _requestPermissions() async {
@@ -182,7 +167,6 @@ class _CameraScreenState extends State<CameraScreen>
     WidgetsBinding.instance.removeObserver(this);
     _cameraController?.dispose();
     _animationController.dispose();
-    _blurController.dispose();
     _advancedZoomController.dispose();
     super.dispose();
   }
@@ -204,11 +188,6 @@ class _CameraScreenState extends State<CameraScreen>
     if (!_isCameraInitialized || _cameraController == null) return;
 
     try {
-      // Trigger blur effect
-      _blurController.forward().then((_) {
-        _blurController.reverse();
-      });
-
       // Capture HDR image with advanced color processing
       final hdrResult = await _hdrCaptureController.captureHdrImage(_cameraController!);
       final imageData = hdrResult['image'] as Uint8List;
@@ -299,11 +278,6 @@ class _CameraScreenState extends State<CameraScreen>
     if (!_isCameraInitialized || _cameraController == null) return;
 
     try {
-      // Trigger blur animation
-      _blurController.forward().then((_) {
-        _blurController.reverse();
-      });
-
       // Use advanced zoom controller for enhanced capture
       final imageData = await _advancedZoomController.captureEnhancedZoomedImage();
       

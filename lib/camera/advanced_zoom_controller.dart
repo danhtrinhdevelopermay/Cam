@@ -99,9 +99,9 @@ class AdvancedZoomController {
   }
   
   /// Set the current camera controller
-  void setCameraController(CameraController controller) {
+  Future<void> setCameraController(CameraController controller) async {
     _cameraController = controller;
-    _detectSensorCapabilities();
+    await _detectSensorCapabilities();
   }
   
   /// Get the optimal camera for the requested zoom level
