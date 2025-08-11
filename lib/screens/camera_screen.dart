@@ -12,9 +12,11 @@ import '../widgets/mode_selector.dart';
 import '../widgets/aspect_ratio_selector.dart';
 import '../widgets/advanced_zoom_controls.dart';
 import '../widgets/color_settings_panel.dart';
+import '../widgets/video_settings_panel.dart';
 import '../camera/advanced_zoom_controller.dart';
 import '../camera/color_processing_controller.dart';
 import '../camera/hdr_capture_controller.dart';
+import '../video/video_recording_controller.dart';
 
 
 class CameraScreen extends StatefulWidget {
@@ -45,8 +47,13 @@ class _CameraScreenState extends State<CameraScreen>
   late ColorProcessingController _colorProcessingController;
   late HdrCaptureController _hdrCaptureController;
   
+  // Video recording controller
+  late VideoRecordingController _videoRecordingController;
+  
   // UI state
   bool _showColorSettings = false;
+  bool _showVideoSettings = false;
+  String? _currentVideoPath;
   
   late AnimationController _animationController;
 
@@ -59,6 +66,7 @@ class _CameraScreenState extends State<CameraScreen>
     _advancedZoomController = AdvancedZoomController();
     _colorProcessingController = ColorProcessingController();
     _hdrCaptureController = HdrCaptureController();
+    _videoRecordingController = VideoRecordingController();
     
     // Setup animations immediately
     _setupAnimations();
@@ -110,6 +118,9 @@ class _CameraScreenState extends State<CameraScreen>
       
       // Configure advanced features after camera is visible
       _configureAdvancedFeaturesAsync();
+      
+      // Initialize video recording controller with camera
+      _videoRecordingController.setCameraController(_cameraController!);
       
     } catch (e) {
       print('Camera initialization error: $e');
@@ -321,6 +332,65 @@ class _CameraScreenState extends State<CameraScreen>
     }
   }
 
+  // Video Recording Methods
+  Future<void> _toggleVideoRecording() async {
+    if (!_isCameraInitialized || _cameraController == null) return;
+    
+    if (_videoRecordingController.isRecording) {
+      // Stop recording
+      final String? videoPath = await _videoRecordingController.stopVideoRecording();
+      
+      if (videoPath != null) {
+        // Save to gallery
+        await ImageGallerySaver.saveFile(videoPath);
+        
+        setState(() {
+          _currentVideoPath = null;
+        });
+        
+        if (mounted) {
+          final settings = _videoRecordingController.currentSettings;
+          final processingNote = settings.frameRate == VideoFrameRate.fps60 ? 
+              ' (AI Enhanced 60fps)' : '';
+          
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Video saved: ${settings.resolution.label}@${settings.frameRate.label}$processingNote'),
+              backgroundColor: Colors.green.withOpacity(0.8),
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      }
+    } else {
+      // Start recording
+      final String? videoPath = await _videoRecordingController.startVideoRecording();
+      
+      if (videoPath != null) {
+        setState(() {
+          _currentVideoPath = videoPath;
+        });
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(_videoRecordingController.getRecordingStatusText()),
+              backgroundColor: Colors.red.withOpacity(0.8),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    }
+  }
+
+  void _onVideoSettingsChanged(VideoRecordingSettings settings) {
+    _videoRecordingController.updateVideoSettings(settings);
+    setState(() {
+      // Update UI if needed
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -391,17 +461,30 @@ class _CameraScreenState extends State<CameraScreen>
                       ),
                     ),
 
-                  // Color Settings Button - iOS 18 Style
-                  iOS18CircularButton(
-                    icon: Icons.palette,
-                    onTap: () {
-                      setState(() {
-                        _showColorSettings = !_showColorSettings;
-                      });
-                    },
-                    isActive: _showColorSettings,
-                    size: 44,
-                  ),
+                  // Video Settings Button - iOS 18 Style (show only in video mode)
+                  if (_currentMode == 'video')
+                    iOS18CircularButton(
+                      icon: Icons.video_settings,
+                      onTap: () {
+                        setState(() {
+                          _showVideoSettings = !_showVideoSettings;
+                        });
+                      },
+                      isActive: _showVideoSettings,
+                      size: 44,
+                    )
+                  else
+                    // Color Settings Button - iOS 18 Style  
+                    iOS18CircularButton(
+                      icon: Icons.palette,
+                      onTap: () {
+                        setState(() {
+                          _showColorSettings = !_showColorSettings;
+                        });
+                      },
+                      isActive: _showColorSettings,
+                      size: 44,
+                    ),
                 ],
               ),
             ),
@@ -425,6 +508,18 @@ class _CameraScreenState extends State<CameraScreen>
               onClose: () {
                 setState(() {
                   _showColorSettings = false;
+                });
+              },
+            ),
+          
+          // Video Settings Panel
+          if (_showVideoSettings)
+            VideoSettingsPanel(
+              videoController: _videoRecordingController,
+              onSettingsChanged: _onVideoSettingsChanged,
+              onClose: () {
+                setState(() {
+                  _showVideoSettings = false;
                 });
               },
             ),
@@ -555,9 +650,9 @@ class _CameraScreenState extends State<CameraScreen>
             ),
           ),
           
-          // Row 3: Advanced Zoom Controls (bottom level - main interaction)
+          // Row 3: Main Controls (camera capture or video recording)
           if (_isCameraInitialized)
-            AdvancedZoomControls(
+            _currentMode == 'video' ? _buildVideoRecordingControls() : AdvancedZoomControls(
               zoomController: _advancedZoomController,
               onZoomChanged: _onZoomChanged,
               onCapturePressed: _captureEnhancedPhoto,
@@ -568,5 +663,253 @@ class _CameraScreenState extends State<CameraScreen>
         ],
       ),
     );
+  }
+
+  /// Build video recording controls with iOS 18 styling
+  Widget _buildVideoRecordingControls() {
+    final isRecording = _videoRecordingController.isRecording;
+    final isProcessing = _videoRecordingController.isProcessing;
+    final currentSettings = _videoRecordingController.currentSettings;
+    
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Video Settings Info Bar
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.2),
+              width: 1,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.videocam,
+                color: isRecording ? Colors.red : Colors.white,
+                size: 16,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                currentSettings.toString(),
+                style: TextStyle(
+                  color: isRecording ? Colors.red : Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              if (currentSettings.frameRate == VideoFrameRate.fps60) ...[
+                const SizedBox(width: 6),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Text(
+                    'AI',
+                    style: TextStyle(
+                      color: Colors.amber,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+        
+        const SizedBox(height: 16),
+        
+        // Recording Controls Row
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Gallery/Preview Button
+            GestureDetector(
+              onTap: isRecording || isProcessing ? null : () {
+                // Open gallery or show last video preview
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.3),
+                    width: 2,
+                  ),
+                ),
+                child: Icon(
+                  Icons.photo_library,
+                  color: isRecording || isProcessing 
+                      ? Colors.white.withOpacity(0.3)
+                      : Colors.white,
+                  size: 24,
+                ),
+              ),
+            ),
+            
+            // Main Record Button
+            GestureDetector(
+              onTap: isProcessing ? null : _toggleVideoRecording,
+              child: Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: isProcessing ? Colors.grey : (isRecording ? Colors.red : Colors.white),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 4,
+                  ),
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    if (isProcessing)
+                      const SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3,
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      )
+                    else
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        child: Icon(
+                          isRecording ? Icons.stop : Icons.fiber_manual_record,
+                          key: ValueKey(isRecording),
+                          color: isRecording ? Colors.white : Colors.red,
+                          size: isRecording ? 35 : 30,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            
+            // Switch Camera Button
+            GestureDetector(
+              onTap: isRecording || isProcessing ? null : () {
+                // Switch camera
+                _switchCamera();
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.3),
+                    width: 2,
+                  ),
+                ),
+                child: Icon(
+                  Icons.flip_camera_ios,
+                  color: isRecording || isProcessing 
+                      ? Colors.white.withOpacity(0.3)
+                      : Colors.white,
+                  size: 24,
+                ),
+              ),
+            ),
+          ],
+        ),
+        
+        // Processing Status
+        if (isProcessing)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Text(
+              'Processing video with AI frame interpolation...',
+              style: TextStyle(
+                color: Colors.amber.withOpacity(0.8),
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        
+        // Recording Status
+        if (isRecording)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'REC',
+                  style: TextStyle(
+                    color: Colors.red.withOpacity(0.9),
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+
+  Future<void> _switchCamera() async {
+    if (_cameraController == null || widget.cameras.length < 2) return;
+
+    try {
+      final newCameraIndex = (_selectedCameraIndex + 1) % widget.cameras.length;
+      
+      await _cameraController?.dispose();
+      
+      _cameraController = CameraController(
+        widget.cameras[newCameraIndex],
+        ResolutionPreset.medium,
+        enableAudio: true,
+        imageFormatGroup: ImageFormatGroup.jpeg,
+      );
+      
+      await _cameraController!.initialize();
+      
+      setState(() {
+        _selectedCameraIndex = newCameraIndex;
+        _isCameraInitialized = true;
+      });
+      
+      // Update video recording controller with new camera
+      _videoRecordingController.setCameraController(_cameraController!);
+      
+    } catch (e) {
+      print('Error switching camera: $e');
+    }
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _cameraController?.dispose();
+    _advancedZoomController.dispose();
+    _videoRecordingController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }
