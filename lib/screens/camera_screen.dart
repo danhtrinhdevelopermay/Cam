@@ -56,13 +56,23 @@ class _CameraScreenState extends State<CameraScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    
+    // Initialize controllers first
     _advancedZoomController = AdvancedZoomController();
     _colorProcessingController = ColorProcessingController();
     _hdrCaptureController = HdrCaptureController();
-    _initializeCamera();
+    
+    // Setup animations immediately
     _setupAnimations();
-    _requestPermissions();
-    _initializeAdvancedZoom();
+    
+    // Start camera initialization immediately
+    _initializeCameraFast();
+    
+    // Run other tasks in parallel
+    Future.wait([
+      _requestPermissions(),
+      _initializeAdvancedZoom(),
+    ]);
   }
 
   void _setupAnimations() {
@@ -86,39 +96,85 @@ class _CameraScreenState extends State<CameraScreen>
   }
 
   Future<void> _requestPermissions() async {
-    await [
-      Permission.camera,
-      Permission.microphone,
-      Permission.storage,
-    ].request();
+    // Request permissions in parallel for faster startup
+    Future.wait([
+      Permission.camera.request(),
+      Permission.microphone.request(),
+      Permission.storage.request(),
+    ]);
   }
 
-  Future<void> _initializeCamera() async {
+  Future<void> _initializeCameraFast() async {
     if (widget.cameras.isEmpty) return;
 
+    // Use high resolution for quality but faster initialization
     _cameraController = CameraController(
       widget.cameras[_selectedCameraIndex],
-      ResolutionPreset.max, // Use maximum resolution for high-res crop method
+      ResolutionPreset.high, // Use high instead of max for faster startup
       enableAudio: true,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
 
     try {
+      // Initialize camera with minimal blocking operations
       await _cameraController!.initialize();
-      
-      // Update advanced zoom controller with new camera
-      _advancedZoomController.setCameraController(_cameraController!);
-      _advancedZoomController.currentCamera = widget.cameras[_selectedCameraIndex];
-      
-      // Configure advanced color processing
-      await _colorProcessingController.configureCameraForAdvancedColor(_cameraController!);
       
       setState(() {
         _isCameraInitialized = true;
       });
+      
+      // Configure advanced features after camera is visible
+      _configureAdvancedFeaturesAsync();
+      
     } catch (e) {
       print('Camera initialization error: $e');
+      // Fallback with lower resolution for compatibility
+      _initializeCameraFallback();
     }
+  }
+
+  Future<void> _configureAdvancedFeaturesAsync() async {
+    if (_cameraController == null) return;
+    
+    try {
+      // Configure advanced features without blocking UI
+      await Future.wait([
+        _advancedZoomController.setCameraController(_cameraController!),
+        _colorProcessingController.configureCameraForAdvancedColor(_cameraController!),
+      ]);
+      
+      // Update camera reference
+      _advancedZoomController.currentCamera = widget.cameras[_selectedCameraIndex];
+      
+    } catch (e) {
+      print('Advanced features configuration error: $e');
+    }
+  }
+
+  Future<void> _initializeCameraFallback() async {
+    if (widget.cameras.isEmpty) return;
+
+    _cameraController = CameraController(
+      widget.cameras[_selectedCameraIndex],
+      ResolutionPreset.medium, // Lower resolution for compatibility
+      enableAudio: false, // Disable audio for faster startup
+      imageFormatGroup: ImageFormatGroup.jpeg,
+    );
+
+    try {
+      await _cameraController!.initialize();
+      setState(() {
+        _isCameraInitialized = true;
+      });
+      _configureAdvancedFeaturesAsync();
+    } catch (e) {
+      print('Camera fallback initialization error: $e');
+    }
+  }
+
+  // Keep original method for app lifecycle management
+  Future<void> _initializeCamera() async {
+    await _initializeCameraFast();
   }
 
   @override
