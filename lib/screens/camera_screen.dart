@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import '../widgets/camera_controls.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+
 import '../widgets/blur_overlay.dart';
 import '../widgets/mode_selector.dart';
 import '../widgets/aspect_ratio_selector.dart';
+import '../widgets/advanced_zoom_controls.dart';
+import '../camera/advanced_zoom_controller.dart';
 
 class CameraScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -21,14 +25,16 @@ class _CameraScreenState extends State<CameraScreen>
     with WidgetsBindingObserver, TickerProviderStateMixin {
   CameraController? _cameraController;
   bool _isCameraInitialized = false;
-  bool _isRecording = false;
+
   bool _isFlashOn = false;
   int _selectedCameraIndex = 0;
   String _currentMode = 'photo';
   double _zoomLevel = 1.0;
-  double _minZoom = 1.0;
-  double _maxZoom = 1.0;
+
   CameraAspectRatio _selectedAspectRatio = CameraAspectRatio.full;
+  
+  // Advanced zoom controller for 10x zoom capabilities
+  late AdvancedZoomController _advancedZoomController;
   
   late AnimationController _animationController;
   late AnimationController _blurController;
@@ -38,9 +44,11 @@ class _CameraScreenState extends State<CameraScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _advancedZoomController = AdvancedZoomController();
     _initializeCamera();
     _setupAnimations();
     _requestPermissions();
+    _initializeAdvancedZoom();
   }
 
   void _setupAnimations() {
@@ -76,15 +84,18 @@ class _CameraScreenState extends State<CameraScreen>
 
     _cameraController = CameraController(
       widget.cameras[_selectedCameraIndex],
-      ResolutionPreset.veryHigh,
+      ResolutionPreset.max, // Use maximum resolution for high-res crop method
       enableAudio: true,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
 
     try {
       await _cameraController!.initialize();
-      _minZoom = await _cameraController!.getMinZoomLevel();
-      _maxZoom = await _cameraController!.getMaxZoomLevel();
+      
+      // Update advanced zoom controller with new camera
+      _advancedZoomController.setCameraController(_cameraController!);
+      _advancedZoomController.currentCamera = widget.cameras[_selectedCameraIndex];
+      
       setState(() {
         _isCameraInitialized = true;
       });
@@ -99,6 +110,7 @@ class _CameraScreenState extends State<CameraScreen>
     _cameraController?.dispose();
     _animationController.dispose();
     _blurController.dispose();
+    _advancedZoomController.dispose();
     super.dispose();
   }
 
@@ -172,12 +184,69 @@ class _CameraScreenState extends State<CameraScreen>
     await _initializeCamera();
   }
 
-  void _onZoomChanged(double zoom) {
+  Future<void> _initializeAdvancedZoom() async {
+    await _advancedZoomController.initialize(widget.cameras);
     if (_cameraController != null) {
-      _cameraController!.setZoomLevel(zoom);
+      _advancedZoomController.setCameraController(_cameraController!);
+    }
+  }
+
+  void _onZoomChanged(double zoom) async {
+    if (_cameraController != null) {
+      // Use advanced zoom controller for enhanced zoom capabilities
+      await _advancedZoomController.setZoomLevel(zoom);
       setState(() {
         _zoomLevel = zoom;
       });
+    }
+  }
+
+  Future<void> _captureEnhancedPhoto() async {
+    if (!_isCameraInitialized || _cameraController == null) return;
+
+    try {
+      // Trigger blur animation
+      _blurController.forward().then((_) {
+        _blurController.reverse();
+      });
+
+      // Use advanced zoom controller for enhanced capture
+      final imageData = await _advancedZoomController.captureEnhancedZoomedImage();
+      
+      if (imageData != null) {
+        // Save to gallery using temporary file
+        final tempDir = await getTemporaryDirectory();
+        final tempFile = File('${tempDir.path}/enhanced_photo_${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await tempFile.writeAsBytes(imageData);
+        
+        await ImageGallerySaver.saveFile(tempFile.path);
+        
+        // Clean up temp file
+        await tempFile.delete();
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Enhanced photo saved (${_selectedAspectRatio.label}, ${_advancedZoomController.getCurrentZoomMethodDescription()})'),
+              backgroundColor: Colors.green.withValues(alpha: 0.8),
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      } else {
+        throw Exception('Enhanced capture failed');
+      }
+    } catch (e) {
+      // Fallback to regular capture
+      await _takePicture();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Fallback to regular capture: $e'),
+            backgroundColor: Colors.orange.withValues(alpha: 0.8),
+          ),
+        );
+      }
     }
   }
 
@@ -332,23 +401,20 @@ class _CameraScreenState extends State<CameraScreen>
             ),
           ),
 
-          // Bottom Controls
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: SafeArea(
-              child: CameraControls(
-                isRecording: _isRecording,
-                onCapturePressed: _takePicture,
-                onSwitchCamera: _switchCamera,
-                onZoomChanged: _onZoomChanged,
-                minZoom: _minZoom,
-                maxZoom: _maxZoom,
-                currentZoom: _zoomLevel,
+          // Advanced Zoom Controls with 10x zoom capabilities
+          if (_isCameraInitialized)
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: SafeArea(
+                child: AdvancedZoomControls(
+                  zoomController: _advancedZoomController,
+                  onZoomChanged: _onZoomChanged,
+                  onCapturePressed: _captureEnhancedPhoto,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
