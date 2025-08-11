@@ -319,16 +319,7 @@ class _CameraScreenState extends State<CameraScreen>
               ),
             ),
 
-          // Blur Overlay Effect
-          AnimatedBuilder(
-            animation: _blurAnimation,
-            builder: (context, child) {
-              return BlurOverlay(
-                sigmaX: _blurAnimation.value,
-                sigmaY: _blurAnimation.value,
-              );
-            },
-          ),
+
 
           // Top Controls - iOS 18 Style
           SafeArea(
