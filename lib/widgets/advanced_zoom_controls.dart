@@ -90,10 +90,10 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.4),
+        color: Colors.black.withOpacity(0.4),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.2),
+          color: Colors.white.withOpacity(0.2),
           width: 1,
         ),
       ),
@@ -124,7 +124,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
             child: Icon(
               Icons.settings,
               size: 16,
-              color: Colors.white.withValues(alpha: 0.7),
+              color: Colors.white.withOpacity(0.7),
             ),
           ),
         ],
@@ -159,10 +159,10 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.3),
+            color: Colors.black.withOpacity(0.3),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.2),
+              color: Colors.white.withOpacity(0.2),
               width: 1,
             ),
           ),
@@ -185,7 +185,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
                       color: isSelected 
-                        ? Colors.yellow.withValues(alpha: 0.9)
+                        ? Colors.yellow.withOpacity(0.9)
                         : Colors.transparent,
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -206,7 +206,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                             height: 2,
                             margin: const EdgeInsets.only(top: 2),
                             decoration: BoxDecoration(
-                              color: isSelected ? Colors.black.withValues(alpha: 0.6) : Colors.white.withValues(alpha: 0.6),
+                              color: isSelected ? Colors.black.withOpacity(0.6) : Colors.white.withOpacity(0.6),
                               borderRadius: BorderRadius.circular(1),
                             ),
                           ),
@@ -229,7 +229,7 @@ class _AdvancedZoomControlsState extends State<AdvancedZoomControls>
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
                     color: _showZoomSlider 
-                      ? Colors.yellow.withValues(alpha: 0.9)
+                      ? Colors.yellow.withOpacity(0.9)
                       : Colors.transparent,
                     borderRadius: BorderRadius.circular(12),
                   ),

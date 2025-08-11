@@ -32,10 +32,10 @@ class AspectRatioSelector extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.3),
+              color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: Colors.white.withValues(alpha: 0.2),
+                color: Colors.white.withOpacity(0.2),
                 width: 1,
               ),
             ),
@@ -55,7 +55,7 @@ class AspectRatioSelector extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: isSelected 
-                        ? Colors.yellow.withValues(alpha: 0.9)
+                        ? Colors.yellow.withOpacity(0.9)
                         : Colors.transparent,
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -124,7 +124,7 @@ class AspectRatioOverlay extends StatelessWidget {
             right: 0,
             height: topBottomOverlay,
             child: Container(
-              color: Colors.black.withValues(alpha: 0.7),
+              color: Colors.black.withOpacity(0.7),
             ),
           ),
         // Bottom overlay
@@ -135,7 +135,7 @@ class AspectRatioOverlay extends StatelessWidget {
             right: 0,
             height: topBottomOverlay,
             child: Container(
-              color: Colors.black.withValues(alpha: 0.7),
+              color: Colors.black.withOpacity(0.7),
             ),
           ),
         // Left overlay
@@ -146,7 +146,7 @@ class AspectRatioOverlay extends StatelessWidget {
             left: 0,
             width: leftRightOverlay,
             child: Container(
-              color: Colors.black.withValues(alpha: 0.7),
+              color: Colors.black.withOpacity(0.7),
             ),
           ),
         // Right overlay
@@ -157,7 +157,7 @@ class AspectRatioOverlay extends StatelessWidget {
             right: 0,
             width: leftRightOverlay,
             child: Container(
-              color: Colors.black.withValues(alpha: 0.7),
+              color: Colors.black.withOpacity(0.7),
             ),
           ),
         // Aspect ratio indicator lines
@@ -170,7 +170,7 @@ class AspectRatioOverlay extends StatelessWidget {
               height: overlayHeight,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.3),
+                  color: Colors.white.withOpacity(0.3),
                   width: 1,
                 ),
               ),

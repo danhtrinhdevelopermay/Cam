@@ -1,0 +1,207 @@
+﻿2025-08-11T01:50:20.2463492Z ##[group]Run flutter build apk --release
+2025-08-11T01:50:20.2463834Z [36;1mflutter build apk --release[0m
+2025-08-11T01:50:20.2503533Z shell: /usr/bin/bash -e {0}
+2025-08-11T01:50:20.2503767Z env:
+2025-08-11T01:50:20.2504042Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T01:50:20.2504514Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+2025-08-11T01:50:20.2504936Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.6-x64
+2025-08-11T01:50:20.2505260Z   PUB_CACHE: /home/runner/.pub-cache
+2025-08-11T01:50:20.2505513Z   ANDROID_HOME: /usr/local/lib/android/sdk
+2025-08-11T01:50:20.2505781Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+2025-08-11T01:50:20.2506030Z ##[endgroup]
+2025-08-11T01:50:20.7505265Z 
+2025-08-11T01:52:27.9943048Z Running Gradle task 'assembleRelease'...                        
+2025-08-11T01:52:27.9946519Z Checking the license for package Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/licenses
+2025-08-11T01:52:27.9947596Z License for package Android SDK Build-Tools 30.0.3 accepted.
+2025-08-11T01:52:27.9948664Z Preparing "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)".
+2025-08-11T01:52:29.0811472Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" ready.
+2025-08-11T01:52:29.0812874Z Installing Android SDK Build-Tools 30.0.3 in /usr/local/lib/android/sdk/build-tools/30.0.3
+2025-08-11T01:52:29.0814529Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" complete.
+2025-08-11T01:52:29.2848333Z "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" finished.
+2025-08-11T01:52:29.4815764Z Checking the license for package Android SDK Platform 30 in /usr/local/lib/android/sdk/licenses
+2025-08-11T01:52:29.4816885Z License for package Android SDK Platform 30 accepted.
+2025-08-11T01:52:29.4818128Z Preparing "Install Android SDK Platform 30 (revision: 3)".
+2025-08-11T01:52:31.8801427Z "Install Android SDK Platform 30 (revision: 3)" ready.
+2025-08-11T01:52:31.8803323Z Installing Android SDK Platform 30 in /usr/local/lib/android/sdk/platforms/android-30
+2025-08-11T01:52:31.8804431Z "Install Android SDK Platform 30 (revision: 3)" complete.
+2025-08-11T01:52:31.8805087Z "Install Android SDK Platform 30 (revision: 3)" finished.
+2025-08-11T01:53:06.1864459Z lib/screens/camera_screen.dart:231:45: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:06.1880305Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:06.1885660Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:06.1890096Z               backgroundColor: Colors.green.withValues(alpha: 0.8),
+2025-08-11T01:53:06.1894671Z                                             ^^^^^^^^^^
+2025-08-11T01:53:06.1899598Z lib/screens/camera_screen.dart:246:44: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:06.1905377Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:06.1910717Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:06.1915769Z             backgroundColor: Colors.orange.withValues(alpha: 0.8),
+2025-08-11T01:53:06.1920322Z                                            ^^^^^^^^^^
+2025-08-11T01:53:07.8807571Z lib/widgets/aspect_ratio_selector.dart:35:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.8817375Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.8826723Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.8835917Z               color: Colors.black.withValues(alpha: 0.3),
+2025-08-11T01:53:07.8844132Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.8857888Z lib/widgets/aspect_ratio_selector.dart:38:37: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.8868023Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.8873072Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.8887290Z                 color: Colors.white.withValues(alpha: 0.2),
+2025-08-11T01:53:07.8888644Z                                     ^^^^^^^^^^
+2025-08-11T01:53:07.8898014Z lib/widgets/aspect_ratio_selector.dart:58:41: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:07.8900204Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:07.8902029Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.8913129Z                         ? Colors.yellow.withValues(alpha: 0.9)
+2025-08-11T01:53:07.8914526Z                                         ^^^^^^^^^^
+2025-08-11T01:53:07.8924127Z lib/widgets/aspect_ratio_selector.dart:127:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.8996880Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.8998918Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.8999880Z               color: Colors.black.withValues(alpha: 0.7),
+2025-08-11T01:53:07.9000474Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.9001680Z lib/widgets/aspect_ratio_selector.dart:138:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9002806Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9004042Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9005005Z               color: Colors.black.withValues(alpha: 0.7),
+2025-08-11T01:53:07.9005598Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.9006759Z lib/widgets/aspect_ratio_selector.dart:149:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9007693Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9008601Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9009567Z               color: Colors.black.withValues(alpha: 0.7),
+2025-08-11T01:53:07.9010168Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.9011382Z lib/widgets/aspect_ratio_selector.dart:160:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9076649Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9077623Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9078620Z               color: Colors.black.withValues(alpha: 0.7),
+2025-08-11T01:53:07.9112021Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.9113505Z lib/widgets/aspect_ratio_selector.dart:173:39: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9114459Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9115382Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9116315Z                   color: Colors.white.withValues(alpha: 0.3),
+2025-08-11T01:53:07.9116918Z                                       ^^^^^^^^^^
+2025-08-11T01:53:07.9118111Z lib/widgets/advanced_zoom_controls.dart:93:29: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9119030Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9119902Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9120811Z         color: Colors.black.withValues(alpha: 0.4),
+2025-08-11T01:53:07.9121354Z                             ^^^^^^^^^^
+2025-08-11T01:53:07.9140060Z lib/widgets/advanced_zoom_controls.dart:96:31: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9141013Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9141893Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9143019Z           color: Colors.white.withValues(alpha: 0.2),
+2025-08-11T01:53:07.9143587Z                               ^^^^^^^^^^
+2025-08-11T01:53:07.9144774Z lib/widgets/advanced_zoom_controls.dart:127:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9145681Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9146547Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9147455Z               color: Colors.white.withValues(alpha: 0.7),
+2025-08-11T01:53:07.9148025Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.9149187Z lib/widgets/advanced_zoom_controls.dart:162:33: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9150076Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9150915Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9182880Z             color: Colors.black.withValues(alpha: 0.3),
+2025-08-11T01:53:07.9183893Z                                 ^^^^^^^^^^
+2025-08-11T01:53:07.9185217Z lib/widgets/advanced_zoom_controls.dart:165:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9186240Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9187266Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9188394Z               color: Colors.white.withValues(alpha: 0.2),
+2025-08-11T01:53:07.9189485Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.9190937Z lib/widgets/advanced_zoom_controls.dart:188:41: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:07.9193226Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:07.9195053Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9196062Z                         ? Colors.yellow.withValues(alpha: 0.9)
+2025-08-11T01:53:07.9196738Z                                         ^^^^^^^^^^
+2025-08-11T01:53:07.9198076Z lib/widgets/advanced_zoom_controls.dart:209:64: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9199085Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9200056Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9201451Z                               color: isSelected ? Colors.black.withValues(alpha: 0.6) : Colors.white.withValues(alpha: 0.6),
+2025-08-11T01:53:07.9202780Z                                                                ^^^^^^^^^^
+2025-08-11T01:53:07.9204246Z lib/widgets/advanced_zoom_controls.dart:209:102: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9205325Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9206286Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9207734Z                               color: isSelected ? Colors.black.withValues(alpha: 0.6) : Colors.white.withValues(alpha: 0.6),
+2025-08-11T01:53:07.9208829Z                                                                                           ^^^^^^^^^^
+2025-08-11T01:53:07.9210247Z lib/widgets/advanced_zoom_controls.dart:232:39: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:07.9212632Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:07.9214708Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9216285Z                       ? Colors.yellow.withValues(alpha: 0.9)
+2025-08-11T01:53:07.9217143Z                                       ^^^^^^^^^^
+2025-08-11T01:53:07.9218924Z lib/widgets/advanced_zoom_controls.dart:261:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9220071Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9221504Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9222902Z               color: Colors.black.withValues(alpha: 0.3),
+2025-08-11T01:53:07.9224076Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.9225688Z lib/widgets/advanced_zoom_controls.dart:264:37: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9227210Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9230838Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9235167Z                 color: Colors.white.withValues(alpha: 0.2),
+2025-08-11T01:53:07.9235790Z                                     ^^^^^^^^^^
+2025-08-11T01:53:07.9239739Z lib/widgets/advanced_zoom_controls.dart:285:53: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9247409Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9248331Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9249348Z                         inactiveColor: Colors.white.withValues(alpha: 0.3),
+2025-08-11T01:53:07.9250215Z                                                     ^^^^^^^^^^
+2025-08-11T01:53:07.9251806Z lib/widgets/advanced_zoom_controls.dart:330:35: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9253269Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9254380Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9255392Z               color: Colors.black.withValues(alpha: 0.4),
+2025-08-11T01:53:07.9256289Z                                   ^^^^^^^^^^
+2025-08-11T01:53:07.9257659Z lib/widgets/advanced_zoom_controls.dart:333:37: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9258827Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9259848Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9261691Z                 color: Colors.white.withValues(alpha: 0.2),
+2025-08-11T01:53:07.9263745Z                                     ^^^^^^^^^^
+2025-08-11T01:53:07.9266137Z lib/widgets/advanced_zoom_controls.dart:419:47: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:07.9269108Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:07.9271996Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9273676Z                           color: Colors.green.withValues(alpha: 0.2),
+2025-08-11T01:53:07.9274424Z                                               ^^^^^^^^^^
+2025-08-11T01:53:07.9275879Z lib/widgets/advanced_zoom_controls.dart:436:41: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9277176Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9278154Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9279405Z                     color: Colors.white.withValues(alpha: 0.7),
+2025-08-11T01:53:07.9280215Z                                         ^^^^^^^^^^
+2025-08-11T01:53:07.9281717Z lib/widgets/advanced_zoom_controls.dart:447:46: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9283449Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9284529Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9285827Z             inactiveThumbColor: Colors.white.withValues(alpha: 0.7),
+2025-08-11T01:53:07.9286739Z                                              ^^^^^^^^^^
+2025-08-11T01:53:07.9288048Z lib/widgets/advanced_zoom_controls.dart:448:46: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9289384Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9310341Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9316248Z             inactiveTrackColor: Colors.white.withValues(alpha: 0.2),
+2025-08-11T01:53:07.9318960Z                                              ^^^^^^^^^^
+2025-08-11T01:53:07.9322644Z lib/widgets/advanced_zoom_controls.dart:461:30: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:07.9327036Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:07.9333426Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9335217Z         color: Colors.orange.withValues(alpha: 0.2),
+2025-08-11T01:53:07.9359882Z                              ^^^^^^^^^^
+2025-08-11T01:53:07.9361502Z lib/widgets/advanced_zoom_controls.dart:464:32: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:07.9363940Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:07.9366146Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9367245Z           color: Colors.orange.withValues(alpha: 0.4),
+2025-08-11T01:53:07.9368046Z                                ^^^^^^^^^^
+2025-08-11T01:53:07.9369466Z lib/widgets/advanced_zoom_controls.dart:515:42: Error: The method 'withValues' isn't defined for the class 'MaterialColor'.
+2025-08-11T01:53:07.9371407Z  - 'MaterialColor' is from 'package:flutter/src/material/colors.dart' ('/opt/hostedtoolcache/flutter/stable-3.19.6-x64/packages/flutter/lib/src/material/colors.dart').
+2025-08-11T01:53:07.9373294Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9374526Z                     color: Colors.yellow.withValues(alpha: 0.3),
+2025-08-11T01:53:07.9375255Z                                          ^^^^^^^^^^
+2025-08-11T01:53:07.9378095Z lib/widgets/advanced_zoom_controls.dart:545:45: Error: The method 'withValues' isn't defined for the class 'Color'.
+2025-08-11T01:53:07.9379298Z  - 'Color' is from 'dart:ui'.
+2025-08-11T01:53:07.9380307Z Try correcting the name to the name of an existing method, or defining a method named 'withValues'.
+2025-08-11T01:53:07.9381362Z                         color: Colors.black.withValues(alpha: 0.7),
+2025-08-11T01:53:07.9382378Z                                             ^^^^^^^^^^
+2025-08-11T01:53:12.1802784Z Target kernel_snapshot failed: Exception
+2025-08-11T01:53:12.1816786Z 
+2025-08-11T01:53:12.1820157Z 
+2025-08-11T01:53:12.1826429Z FAILURE: Build failed with an exception.
+2025-08-11T01:53:12.1870462Z 
+2025-08-11T01:53:12.1870802Z * What went wrong:
+2025-08-11T01:53:12.1871765Z Execution failed for task ':app:compileFlutterBuildRelease'.
+2025-08-11T01:53:12.1873330Z > Process 'command '/opt/hostedtoolcache/flutter/stable-3.19.6-x64/bin/flutter'' finished with non-zero exit value 1
+2025-08-11T01:53:12.1874169Z 
+2025-08-11T01:53:12.1874313Z * Try:
+2025-08-11T01:53:12.1875065Z > Run with --stacktrace option to get the stack trace.
+2025-08-11T01:53:12.1876289Z > Run with --info or --debug option to get more log output.
+2025-08-11T01:53:12.1877133Z > Run with --scan to get full insights.
+2025-08-11T01:53:12.1877514Z 
+2025-08-11T01:53:12.1877844Z * Get more help at https://help.gradle.org
+2025-08-11T01:53:12.1878281Z 
+2025-08-11T01:53:12.1878519Z BUILD FAILED in 2m 51s
+2025-08-11T01:53:12.5860714Z Running Gradle task 'assembleRelease'...                          171.8s
+2025-08-11T01:53:12.5901958Z Gradle task assembleRelease failed with exit code 1
+2025-08-11T01:53:12.5967024Z ##[error]Process completed with exit code 1.

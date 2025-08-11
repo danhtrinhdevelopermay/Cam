@@ -228,7 +228,7 @@ class _CameraScreenState extends State<CameraScreen>
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('Enhanced photo saved (${_selectedAspectRatio.label}, ${_advancedZoomController.getCurrentZoomMethodDescription()})'),
-              backgroundColor: Colors.green.withValues(alpha: 0.8),
+              backgroundColor: Colors.green.withOpacity(0.8),
               duration: const Duration(seconds: 3),
             ),
           );
@@ -243,7 +243,7 @@ class _CameraScreenState extends State<CameraScreen>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Fallback to regular capture: $e'),
-            backgroundColor: Colors.orange.withValues(alpha: 0.8),
+            backgroundColor: Colors.orange.withOpacity(0.8),
           ),
         );
       }
