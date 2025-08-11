@@ -25,15 +25,11 @@ class _ZoomSettingsPanelState extends State<ZoomSettingsPanel> {
     
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.8),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-            ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.9),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        ),
             child: Column(
               children: [
                 // Header

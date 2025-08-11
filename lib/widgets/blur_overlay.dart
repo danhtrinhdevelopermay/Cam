@@ -166,13 +166,10 @@ class iOS18CircularButton extends StatelessWidget {
             ),
           ],
         ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Icon(
-            icon,
-            color: isActive ? Colors.black : Colors.white,
-            size: size * 0.4,
-          ),
+        child: Icon(
+          icon,
+          color: isActive ? Colors.black : Colors.white,
+          size: size * 0.4,
         ),
       ),
     );

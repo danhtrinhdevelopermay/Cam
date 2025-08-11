@@ -77,21 +77,10 @@ class _CameraControlsState extends State<CameraControls>
                   width: 2,
                 ),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                    ),
-                    child: const Icon(
-                      Icons.photo_library_outlined,
-                      color: Colors.white,
-                      size: 24,
-                    ),
-                  ),
-                ),
+              child: const Icon(
+                Icons.photo_library_outlined,
+                color: Colors.white,
+                size: 24,
               ),
             ),
           ),
@@ -164,21 +153,10 @@ class _CameraControlsState extends State<CameraControls>
                   width: 2,
                 ),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                    ),
-                    child: const Icon(
-                      Icons.flip_camera_ios,
-                      color: Colors.white,
-                      size: 24,
-                    ),
-                  ),
-                ),
+              child: const Icon(
+                Icons.flip_camera_ios,
+                color: Colors.white,
+                size: 24,
               ),
             ),
           ),
